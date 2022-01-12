@@ -52,7 +52,7 @@ function Profile() {
         <FileBase
           type="file"
           multiple={false}
-          disable={true}
+          // disable={true}
           value={updatedData.imageUrl}
           onDone={({ base64 }) =>
             setUpdatedData({ ...updatedData, imageUrl: base64 })

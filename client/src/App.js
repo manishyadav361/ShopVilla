@@ -3,6 +3,8 @@ import useStyles from "./styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
+import Products from "./components/Products/Products";
+import Product from "./components/Admin/Product/Product";
 function App() {
   const classes = useStyles();
 
@@ -23,6 +25,16 @@ function App() {
               </>
             }
           />
+          <Route
+            path="/products"
+            element={
+              <>
+                <Header />
+                <Products />
+              </>
+            }
+          />
+          <Route path="/admin/product" element={<Product />} />
         </Routes>
       </div>
     </BrowserRouter>

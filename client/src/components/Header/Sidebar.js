@@ -3,13 +3,14 @@ import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import PersonIcon from "@material-ui/icons/Person";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useStyles from "./HeaderStyles";
 import SidebarOption from "./SidebarOption";
 function Sidebar({ toggle, setToggle }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation().pathname === "/admin";
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     setToggle(!toggle);

@@ -6,13 +6,15 @@ export default makeStyles((theme) => ({
     padding: "0",
     display: "flex",
     flexDirection: "column",
-    position: "fixed",
+    position: "sticky",
     top: "0%",
     background: "#2F2D2D",
     minWidth: "100%",
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "15px",
     },
+    // borderBottom: "1px solid rgba(255,255,255,0.2)",
+    boxShadow: "4px 4px 10px rgba(0,0,0,0.5)",
   },
   container: {
     padding: "10px",
@@ -28,8 +30,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "100%",
     },
-    position: "sticky",
-    top: "0%",
+    // position: "fixed",
+    // top: "0%",
   },
   menu: {
     color: "#6D86F5",
