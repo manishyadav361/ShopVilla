@@ -6,12 +6,23 @@ import {
   InputAdornment,
   TextField,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./ProductStyle";
+import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
+import { insertProduct, updateProduct } from "../../../actions/Products";
+import { useParams } from "react-router-dom";
 function Product() {
   const classes = useStyles();
-  const [formData, setFormData] = useState({
+  const params = useParams();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const product = state?.Products?.products?.filter(
+    (product) => product?._id === params?.id
+  )?.[0];
+
+  const initialState = {
     title: "",
     coverImage: "",
     price: 0,
@@ -19,19 +30,35 @@ function Product() {
     brandName: "",
     description: "",
     quantity: "",
-    colors: null,
+    colors: "",
     category: "",
     material: "",
-    keywords: null,
+    keywords: "",
     warranty: 0,
     shipping: 0,
     inStock: false,
     freeShipping: false,
-  });
+  };
+
+  const [formData, setFormData] = useState(null);
 
   const uploadProduct = () => {
-    console.log(formData);
+    dispatch(
+      insertProduct(formData, user?.result?._id || user?.result?.googleId)
+    );
   };
+
+  const update = () => {
+    dispatch(updateProduct(formData, params?.id));
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      setFormData({ ...product });
+    } else {
+      setFormData(initialState);
+    }
+  }, [product]);
 
   return (
     <Container className={classes.container}>
@@ -39,17 +66,17 @@ function Product() {
         <TextField
           label="Title"
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          value={formData?.title || ""}
+          autoFocus={true}
+          variant="filled"
         />
-        {/* <TextField
-          label="Image"
-          onChange={(e) =>
-            setFormData({ ...formData, coverImage: e.target.value })
-          }
-        /> */}
+
         <TextField
           label="Price"
           type="number"
           onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+          value={formData?.price || ""}
+          autoFocus={true}
         />
         <TextField
           label="Offer"
@@ -57,12 +84,16 @@ function Product() {
           onChange={(e) =>
             setFormData({ ...formData, offerPercentage: e.target.value })
           }
+          value={formData?.offerPercentage || ""}
+          autoFocus={true}
         />
         <TextField
           label="BrandName"
           onChange={(e) =>
             setFormData({ ...formData, brandName: e.target.value })
           }
+          value={formData?.brandName || ""}
+          autoFocus={true}
         />
 
         <TextField
@@ -70,6 +101,8 @@ function Product() {
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
+          value={formData?.description || ""}
+          autoFocus={true}
         />
         <TextField
           label="Quantity"
@@ -77,6 +110,8 @@ function Product() {
           onChange={(e) =>
             setFormData({ ...formData, quantity: e.target.value })
           }
+          value={formData?.quantity || ""}
+          autoFocus={true}
         />
         <TextField
           label="Colors"
@@ -84,12 +119,16 @@ function Product() {
           onChange={(e) =>
             setFormData({ ...formData, colors: e.target?.value?.split(",") })
           }
+          value={formData?.colors || ""}
+          autoFocus={true}
         />
         <TextField
           label="Category"
           onChange={(e) =>
             setFormData({ ...formData, category: e.target.value })
           }
+          value={formData?.category || ""}
+          autoFocus={true}
         />
         <TextField
           label="Material"
@@ -97,6 +136,8 @@ function Product() {
           onChange={(e) =>
             setFormData({ ...formData, material: e.target?.value?.split(",") })
           }
+          value={formData?.material || ""}
+          autoFocus={true}
         />
         <TextField
           label="Keywords"
@@ -104,12 +145,16 @@ function Product() {
           onChange={(e) =>
             setFormData({ ...formData, keywords: e.target?.value?.split(",") })
           }
+          value={formData?.keywords || ""}
+          autoFocus={true}
         />
         <TextField
           label="Warranty"
           onChange={(e) =>
             setFormData({ ...formData, warranty: e.target?.value })
           }
+          value={formData?.warranty || ""}
+          autoFocus={true}
         />
         <TextField
           label="Shipping Fee"
@@ -117,6 +162,8 @@ function Product() {
           onChange={(e) =>
             setFormData({ ...formData, shipping: e.target?.value })
           }
+          value={formData?.shipping || ""}
+          autoFocus={true}
         />
         <Input
           endAdornment={
@@ -134,9 +181,9 @@ function Product() {
       </Box>
       <Box className={classes.box2}>
         <Button
-          className={formData.inStock ? `${classes.toggle} ` : ""}
+          className={formData?.inStock ? `${classes.toggle} ` : ""}
           variant="contained"
-          color={!formData.inStock ? "secondary" : "inherit"}
+          color={!formData?.inStock ? "secondary" : "inherit"}
           onClick={() =>
             setFormData({ ...formData, inStock: !formData.inStock })
           }
@@ -145,22 +192,28 @@ function Product() {
         </Button>
         <Button
           variant="contained"
-          color={!formData.freeShipping ? "secondary" : "inherit"}
-          className={formData.freeShipping ? `${classes.toggle} ` : ""}
+          color={!formData?.freeShipping ? "secondary" : "inherit"}
+          className={formData?.freeShipping ? `${classes.toggle} ` : ""}
           onClick={() =>
-            setFormData({ ...formData, freeShipping: !formData.freeShipping })
+            setFormData({ ...formData, freeShipping: !formData?.freeShipping })
           }
         >
           Free Shipping
         </Button>
       </Box>
-      <Button
-        onClick={uploadProduct}
-        variant="contained"
-        className={classes.submit}
-      >
-        Submit
-      </Button>
+      {!product ? (
+        <Button
+          onClick={uploadProduct}
+          variant="contained"
+          className={classes.submit}
+        >
+          Submit
+        </Button>
+      ) : (
+        <Button onClick={update} variant="contained" className={classes.submit}>
+          Update
+        </Button>
+      )}
     </Container>
   );
 }

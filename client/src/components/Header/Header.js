@@ -18,13 +18,16 @@ import decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar.js";
+import { getAllProducts } from "../../actions/Products.js";
 
 function Header() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const state = useSelector((state) => state.Auth);
+  const state = useSelector((state) => state);
+  const authState = state.Auth;
+  const productsState = state.Products;
   const [toggle, setToggle] = useState(false);
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -33,9 +36,10 @@ function Header() {
     dispatch({ type: "LOGOUT" });
     navigate("/auth");
   };
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [state]);
+  }, [authState]);
   useEffect(() => {
     const token = user?.token;
 
@@ -46,6 +50,10 @@ function Header() {
       }
     }
   }, [location]);
+  console.log(state);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, []);
 
   return (
     <Container className={classes.header}>

@@ -3,7 +3,6 @@ import * as api from "../Api/index";
 export const signIn = (formData, history) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
-    console.log(data);
     dispatch({ type: "SIGNIN", payload: data });
     history("/");
   } catch (error) {

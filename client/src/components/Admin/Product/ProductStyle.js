@@ -18,7 +18,7 @@ export default makeStyles((theme) => ({
     gridGap: "10px 0px",
     [theme.breakpoints.up("sm")]: {
       gridTemplateColumns: "300px 300px",
-      gridGap: "10px 10px",
+      gridGap: "10px 40px",
     },
   },
   box2: {
