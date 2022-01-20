@@ -15,7 +15,10 @@ function MobileNav() {
   return (
     <Box className={classes.mainNav}>
       <Box className={classes.openNav}>
-        <IconButton onClick={() => setOpenNav(!openNav)}>
+        <IconButton
+          className={classes.apps}
+          onClick={() => setOpenNav(!openNav)}
+        >
           <AppsIcon />
         </IconButton>
       </Box>

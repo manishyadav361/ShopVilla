@@ -2,6 +2,7 @@ import { Container } from "@material-ui/core";
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import PersonIcon from "@material-ui/icons/Person";
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import useStyles from "./HeaderStyles";
@@ -10,7 +11,6 @@ function Sidebar({ toggle, setToggle }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation().pathname === "/admin";
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     setToggle(!toggle);
@@ -39,7 +39,11 @@ function Sidebar({ toggle, setToggle }) {
           setToggle(!toggle);
         }}
       />
-
+      <SidebarOption
+        text="Admin Panel"
+        Icon={<SupervisorAccountIcon />}
+        action={() => navigate("/admin")}
+      />
       <SidebarOption
         text="Logout"
         Icon={<PowerSettingsNew />}

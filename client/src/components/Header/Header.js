@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar.js";
 import { getAllProducts } from "../../actions/Products.js";
+import { getCart } from "../../actions/Cart.js";
 
 function Header() {
   const classes = useStyles();
@@ -27,7 +28,7 @@ function Header() {
   const location = useLocation();
   const state = useSelector((state) => state);
   const authState = state.Auth;
-  const productsState = state.Products;
+  const cartState = state.Cart;
   const [toggle, setToggle] = useState(false);
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -36,6 +37,14 @@ function Header() {
     dispatch({ type: "LOGOUT" });
     navigate("/auth");
   };
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, []);
+  console.log(cartState);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
@@ -50,10 +59,6 @@ function Header() {
       }
     }
   }, [location]);
-  console.log(state);
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, []);
 
   return (
     <Container className={classes.header}>
@@ -93,7 +98,11 @@ function Header() {
             />
           </IconButton>
           <IconButton>
-            <Badge className={classes.badge} color="error" badgeContent={1}>
+            <Badge
+              className={classes.badge}
+              color="error"
+              badgeContent={cartState?.cart?.products?.length || 0}
+            >
               <ShoppingCartIcon className={classes.cart} />
             </Badge>
           </IconButton>

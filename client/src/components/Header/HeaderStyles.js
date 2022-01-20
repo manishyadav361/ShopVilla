@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export default makeStyles((theme) => ({
   header: {
     margin: "0",
+    zIndex: "100",
     padding: "0",
     display: "flex",
     flexDirection: "column",
@@ -65,14 +66,13 @@ export default makeStyles((theme) => ({
     },
   },
   searchBar: {
-    margin: "0px auto",
-    display: "flex",
-    alignItems: "center",
-    background: "rgba(255,255,255,0.15)",
-    width: "50%",
-
-    [theme.breakpoints.between("xs", "sm")]: {
-      display: "none",
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      margin: "0px auto",
+      display: "flex",
+      alignItems: "center",
+      background: "rgba(255,255,255,0.15)",
+      width: "50%",
     },
 
     borderRadius: "8px",
@@ -81,11 +81,12 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
-    [theme.breakpoints.down("sm")]: {
-      background: "rgba(255,255,255,0.15)",
-      display: "flex",
-      width: "70%",
-    },
+
+    background: "rgba(255,255,255,0.15)",
+    display: "flex",
+    minWidth: "70%",
+    justifyContent: "center",
+    margin: "0px auto",
   },
 
   logout: {
@@ -157,7 +158,9 @@ export default makeStyles((theme) => ({
   },
   sidebarOption: {
     color: "#6d86f5",
-    padding: "14px",
+    display: "flex",
+    padding: "10px 30px",
+    justifyContent: "flex-start",
     "&:hover": {
       background: "rgba(255,255,255,0.05)",
     },

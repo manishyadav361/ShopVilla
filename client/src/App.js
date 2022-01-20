@@ -5,18 +5,12 @@ import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Products from "./components/Products/Products";
 import Product from "./components/Admin/Product/Product";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getAllProducts } from "./actions/Products";
 import AdminProducts from "./components/Admin/Product/AdminProducts/AdminProducts";
 import Admin from "./components/Admin/Product/Admin/Admin";
 function App() {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <div className={classes.app}>

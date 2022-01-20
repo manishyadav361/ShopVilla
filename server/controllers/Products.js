@@ -2,6 +2,9 @@ import ProductsModel from "../Models/Products.js";
 import mongoose from "mongoose";
 
 export const getProducts = async (req, res) => {
+  if (!req.userId) {
+    res.status(400).send("Access Denied !!");
+  }
   try {
     const products = await ProductsModel.find({});
     res.status(200).json({ products: products });
@@ -12,10 +15,10 @@ export const getProducts = async (req, res) => {
 
 export const insertProduct = async (req, res) => {
   const { data } = req.body;
-  const { id } = req.params;
+  const { userId } = req;
 
   try {
-    const product = await ProductsModel.create({ ...data, createdBy: id });
+    const product = await ProductsModel.create({ ...data, createdBy: userId });
     res.status(200).json({ product: product });
   } catch (error) {
     res.status(500).send("something went wrong!!");
@@ -41,6 +44,9 @@ export const updateProduct = async (req, res) => {
   const { id } = req.params;
 
   try {
+    if (!req.userId) {
+      res.status(400).send("Access Denied !!");
+    }
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send("cannot find product with id:", productId);
     const product = await ProductsModel.findByIdAndUpdate(

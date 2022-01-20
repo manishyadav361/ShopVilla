@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./Routes/Auth.js";
 import productsRoutes from "./Routes/Products.js";
+import cartRoutes from "./Routes/Carts.js";
 import dotenv from "dotenv";
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use("/auth", authRoutes);
 app.use("/products", productsRoutes);
+app.use("/cart", cartRoutes);
 
 mongoose
   .connect(process.env.MONGO_URL, {

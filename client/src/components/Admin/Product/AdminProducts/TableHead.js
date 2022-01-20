@@ -4,16 +4,16 @@ import useStyles from "./AdminProductsStyles";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 
-function TableHead() {
+function TableHead({ selectAll, setSelectAll }) {
   const classes = useStyles();
-  const [select, setSelect] = useState(false);
+  // const [select, setSelect] = useState(false);
   const handleSelect = () => {
-    setSelect(!select);
+    setSelectAll(!selectAll);
   };
   return (
     <Box className={`${classes.product} ${classes.head}`}>
       <Box className={classes.select}>
-        {!select ? (
+        {!selectAll ? (
           <IconButton onClick={handleSelect} edge="start" size="small">
             <CheckBoxOutlineBlankIcon />
           </IconButton>

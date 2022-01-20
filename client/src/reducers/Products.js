@@ -34,8 +34,15 @@ const reducer = (
         error: "",
       };
     case "UPDATE_PRODUCT":
+      const updated = state?.products?.map((product) => {
+        if (product?._id === action?.payload?._id) {
+          return action.payload;
+        }
+        return product;
+      });
       return {
         ...state,
+        products: updated,
         loading: false,
         error: "",
       };

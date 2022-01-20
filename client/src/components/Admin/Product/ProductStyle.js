@@ -4,11 +4,21 @@ export default makeStyles((theme) => ({
   container: {
     height: "100vh",
     background: "white",
-    display: "flex",
     flexDirection: "column",
     [theme.breakpoints.up("sm")]: {
-      justifyContent: "center",
+      // justifyContent: "center",
+      display: "flex",
+      flexDirection: "row",
     },
+    padding: "0",
+    margin: "0",
+    minWidth: "100%",
+    overflow: "hidden",
+  },
+  form: {
+    height: "100vh",
+    overflowY: "scroll",
+    flex: "1",
   },
   productInfo: {
     padding: "20px 0px",
@@ -16,7 +26,7 @@ export default makeStyles((theme) => ({
     gridTemplateColumns: "80%",
     justifyContent: "center",
     gridGap: "10px 0px",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       gridTemplateColumns: "300px 300px",
       gridGap: "10px 40px",
     },
@@ -27,7 +37,7 @@ export default makeStyles((theme) => ({
     gridTemplateColumns: "40% 40%",
     justifyContent: "center",
     gridGap: "4px 5px",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       gridTemplateColumns: "280px 280px",
       gridGap: "10px 10px",
     },

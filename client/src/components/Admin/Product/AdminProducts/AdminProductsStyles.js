@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-
+import svg from "../../../../images/Group 219.png";
 export default makeStyles((theme) => ({
   productsContainer: {
     [theme.breakpoints.up("sm")]: {
@@ -23,7 +23,8 @@ export default makeStyles((theme) => ({
     margin: "0 auto",
     cursor: "pointer",
     "&:hover": {
-      background: "rgba(220,220,220,0.05)",
+      // background: "rgba(220,220,220,0.05)",
+      background: "rgb(231, 251, 190,0.7)",
       boxShadow: "0px 2px 10px rgba(0,0,0,0.05)",
     },
     [theme.breakpoints.only("md")]: {
@@ -77,6 +78,9 @@ export default makeStyles((theme) => ({
     borderRadius: "0px",
     zIndex: "10",
     background: "whitesmoke",
+    "&:hover": {
+      background: "whitesmoke",
+    },
   },
   titleField: {
     width: "100%",

@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/core";
 export default makeStyles((theme) => ({
   container: {
     [theme.breakpoints.up("sm")]: {
-      maxWidth: "200px",
+      maxWidth: "220px",
       height: "100vh",
       background: "white",
-      boxShadow: "2px 0px 10px rgba(0,0,0,0.3)",
+      boxShadow: "2px 0px 8px rgba(0,0,0,0.15)",
       margin: "0",
       padding: "0",
 
@@ -18,16 +18,40 @@ export default makeStyles((theme) => ({
 
     display: "none",
   },
+  profile: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%",
+  },
+  btn: {
+    display: "flex",
+    justifyContent: "flex-start",
+    padding: "10px 30px",
+    borderRadius: "0%",
+    "&:hover": {
+      background: "rgb(88, 0, 255)",
+      color: "white",
+    },
+  },
+  active: {
+    background: "rgb(88, 0, 255)",
+    color: "white",
+  },
   top: {
     borderTopRightRadius: "8px",
     width: "100%",
-    background: "purple",
-    height: "120px",
+    background: "#E7FBBE",
+    height: "150px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   bottom: {
     width: "100%",
     display: "flex",
     flexDirection: "column",
+    // height: "100%",
   },
   mainNav: {
     position: "absolute",
@@ -51,7 +75,7 @@ export default makeStyles((theme) => ({
     alignItems: "center",
   },
   openNav: {
-    position: "absolute",
+    position: "fixed",
     bottom: "10%",
     width: "100%",
     display: "flex",
@@ -62,6 +86,7 @@ export default makeStyles((theme) => ({
     },
   },
   toggleNav: {
+    position: "fixed",
     height: "100vh",
     transition: "all 2s ease-in",
     display: "grid",
@@ -69,7 +94,7 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    position: "absolute",
+    // position: "absolute",
     top: "0%",
     boxShadow: "0px 0px 45px rgba(0, 0, 0, 0.25)",
     background: "rgba(255, 255, 255, 0.03)",
@@ -79,5 +104,13 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
+  },
+  apps: {
+    "&:hover": {
+      background: "#E7FBBE",
+    },
+    background: "#E7FBBE",
+    color: "black",
+    boxShadow: "4px 4px 8px rgba(0,0,0,0.3)",
   },
 }));

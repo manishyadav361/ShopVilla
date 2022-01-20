@@ -26,3 +26,9 @@ export const deleteProduct = (id) => API.delete(`/products/${id}`);
 
 export const updateProduct = (formData, id) =>
   API.patch(`/products/${id}`, formData);
+
+export const getCart = () => API.get("/cart");
+export const createCart = (productId, price) =>
+  API.post("/cart", { productId, price });
+export const removeCart = (productId, price) =>
+  API.patch("/cart", { productId, price });
