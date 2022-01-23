@@ -31,8 +31,6 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "100%",
     },
-    // position: "fixed",
-    // top: "0%",
   },
   menu: {
     color: "#6D86F5",

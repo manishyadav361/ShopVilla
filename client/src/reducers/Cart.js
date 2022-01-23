@@ -24,6 +24,13 @@ const reducer = (
         loading: false,
         error: null,
       };
+    case "REMOVE_CART_ITEM":
+      return {
+        ...state,
+        cart: action.payload,
+        loading: false,
+        error: null,
+      };
     default:
       return state;
   }

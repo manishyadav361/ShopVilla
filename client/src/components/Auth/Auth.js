@@ -13,8 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./AuthStyles";
 import GoogleLogin from "react-google-login";
 import GoogleLogo from "../../images/google-logo-9824.png";
+import Spinner from "../../images/Spinner-1s-200px (2).gif";
 import { signUp, signIn } from "../../actions/Auth";
-import Loader from "../Loader/Loader";
+import Loader from "../Loader";
 function Auth() {
   const [toggle, setToggle] = useState(false);
   const [formData, setFormData] = useState({
@@ -53,10 +54,12 @@ function Auth() {
     history("/");
   };
 
+  console.log(state);
+
   return (
     <>
-      {state.loading && <Loader />}
       <Container className={classes.container}>
+        {state.loading && <Loader />}
         <Box className={classes.logo}></Box>
         {toggle && (
           <TextField

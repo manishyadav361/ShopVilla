@@ -1,12 +1,30 @@
 import { makeStyles } from "@material-ui/core";
 export default makeStyles((theme) => ({
+  loader: {
+    position: "absolute",
+    zIndex: "100",
+    height: "100vh",
+    width: "100%",
+    background: "grey",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+  },
   container: {
     width: "100%",
     minHeight: "100vh",
     padding: "0",
     minWidth: "100%",
     margin: "0",
-    background: "white",
+    background: "#1a1a1a",
+
+    position: "relative",
+    // display: "flex",
+    // flexDirection: "column",
+    height: "100vh",
+    overflow: "hidden",
+    overflowY: "scroll",
   },
   product: {
     display: "flex",
@@ -19,14 +37,14 @@ export default makeStyles((theme) => ({
   },
 
   top: {
-    background: "white",
+    // background: "white",
+    background: "lightblue",
     height: "200px",
-    width: "100%",
+    minWidth: "100%",
     display: "flex",
     justifyContent: "space-between",
-    borderRadius: "25px",
-    boxShadow: "4px 4px 25px rgba(0, 0, 0, 0.2 )",
-
+    borderRadius: "5px",
+    boxShadow: "4px 4px 25px rgba(0, 0, 0, 0.1s)",
     position: "relative",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -61,9 +79,10 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   products: {
-    // minHeight: "100vh",
+    minHeight: "100vh",
     width: "100%",
     display: "grid",
+    alignItems: "flex-start",
     gridTemplateColumns: "45% 45%",
     justifyContent: "space-around",
     margin: "0px auto",
@@ -77,6 +96,13 @@ export default makeStyles((theme) => ({
     },
     [theme.breakpoints.between("md", "xl")]: {
       gridTemplateColumns: "250px 250px 250px 250px ",
+    },
+    background: "#1a1a1a",
+    color: "white",
+    overflow: "hidden",
+    overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
     },
   },
   title: {

@@ -3,13 +3,28 @@ import mongoose from "mongoose";
 
 export const getProducts = async (req, res) => {
   if (!req.userId) {
-    res.status(400).send("Access Denied !!");
+    return res.status(400).send("Access Denied !!");
   }
   try {
     const products = await ProductsModel.find({});
     res.status(200).json({ products: products });
   } catch (error) {
     res.status(500).send("something went wrong !");
+  }
+};
+
+export const getProductsBySearch = async (req, res) => {
+  const { searchString } = req.query;
+  const searchArray = searchString.split(" ");
+  const title = new RegExp(searchString, "i");
+  try {
+    const products = await ProductsModel.find({
+      $or: [{ title }, { keywords: { $in: searchArray } }],
+    });
+    res.status(200).json({ products: products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong");
   }
 };
 
@@ -58,6 +73,7 @@ export const updateProduct = async (req, res) => {
     );
     res.status(200).json({ product: product });
   } catch (error) {
+    console.log(error);
     res.status(500).send("something went wrong!!");
   }
 };

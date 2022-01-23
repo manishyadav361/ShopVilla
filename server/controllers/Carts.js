@@ -78,7 +78,7 @@ export const removeCart = async (req, res) => {
           }
         });
         cart = await cart.save();
-        res.status(200).json(cart);
+        res.status(200).json({ cart });
       }
     }
   } catch (error) {
@@ -86,20 +86,24 @@ export const removeCart = async (req, res) => {
     console.log(error);
   }
 };
+export const removeCartProduct = async (req, res) => {
+  const { productId } = req.body;
+  const { userId } = req;
+  let cart = await CartsModel.findOne({ userId });
 
-// try {
-//   if (!userId) return res.status(400).send("Access Denied!!");
-
-//   const cart = await CartsModel.create({
-//     _id: userId,
-//     products: {
-//       productId,
-//       total: price,
-//       quantity: 1,
-//     },
-//   });
-//   res.status(200).json({ cart: cart });
-// } catch (error) {
-//   res.status(500).send();
-//   console.log(error);
-// }
+  try {
+    if (cart) {
+      if (cart?.products) {
+        cart.products = cart?.products.filter(
+          (product) => product?.productId !== productId
+        );
+      }
+      cart = await cart.save();
+      res.status(200).json({ cart });
+    } else {
+      return;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

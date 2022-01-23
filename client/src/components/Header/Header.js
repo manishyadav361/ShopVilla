@@ -37,14 +37,14 @@ function Header() {
     dispatch({ type: "LOGOUT" });
     navigate("/auth");
   };
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getCart());
-  }, []);
-  console.log(cartState);
+    if (user) {
+      dispatch(getCart());
+    } else {
+      navigate("/auth");
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
@@ -97,7 +97,7 @@ function Header() {
               alt=""
             />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => navigate("/cart")}>
             <Badge
               className={classes.badge}
               color="error"

@@ -22,5 +22,16 @@ export const removeProduct = (productId, price) => async (dispatch) => {
   try {
     const { data } = await api.removeCart(productId, price);
     dispatch({ type: "REMOVE_PRODUCT", payload: data.cart });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeCartItem = (productId) => async (dispatch) => {
+  try {
+    const { data } = await api.removeCartItem(productId);
+    dispatch({ type: "REMOVE_CART_ITEM", payload: data.cart });
+  } catch (error) {
+    console.log(error);
+  }
 };

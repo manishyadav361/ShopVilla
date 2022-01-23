@@ -15,7 +15,7 @@ const ProductsSchema = mongoose.Schema({
   offerPercentage: { type: Number },
   createdBy: { type: String },
   quantity: { type: Number },
-  warranty: { type: Number },
+  warranty: { type: String },
   shipping: { type: Number },
   inStock: { type: Boolean },
   freeShipping: { type: Boolean },

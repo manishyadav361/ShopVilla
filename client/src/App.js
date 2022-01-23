@@ -7,6 +7,8 @@ import Products from "./components/Products/Products";
 import Product from "./components/Admin/Product/Product";
 import AdminProducts from "./components/Admin/Product/AdminProducts/AdminProducts";
 import Admin from "./components/Admin/Product/Admin/Admin";
+import Cart from "./components/Cart/Cart";
+import SearchProducts from "./components/SearchProducts/SearchProducts";
 function App() {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -18,6 +20,7 @@ function App() {
           <Route path="/" element={<Header />} />
           <Route path="/auth" element={<Auth />} />
           <Route
+            exact
             path="/profile"
             element={
               <>
@@ -27,6 +30,7 @@ function App() {
             }
           />
           <Route
+            exact
             path="/products"
             element={
               <>
@@ -35,15 +39,37 @@ function App() {
               </>
             }
           />
-          <Route path="/admin/product" element={<Product />} />
+          <Route
+            exact
+            path="/products/search"
+            element={
+              <>
+                <Header />
+                <SearchProducts />
+              </>
+            }
+          />
+
+          <Route exact path="/admin/product" element={<Product />} />
           <Route exact path="/admin/product/:id" element={<Product />} />
           <Route
+            exact
             path={`/admin/products/${
               user?.result?._id || user?.result?.googleId
             }`}
             element={<AdminProducts user={user} />}
           />
           <Route path="/admin" element={<Admin user={user} />} />
+          <Route
+            exact
+            path="/cart"
+            element={
+              <>
+                <Header />
+                <Cart />
+              </>
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>

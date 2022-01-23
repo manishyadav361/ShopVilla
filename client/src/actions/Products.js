@@ -2,8 +2,20 @@ import * as api from "../Api/index";
 
 export const getAllProducts = () => async (dispatch) => {
   try {
+    dispatch({ type: "START_LOADING" });
     const { data } = await api.getProducts();
     dispatch({ type: "GET_ALL_PRODUCTS", payload: data.products });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getProductsBySearch = (searchString) => async (dispatch) => {
+  try {
+    dispatch({ type: "START_LOADING" });
+
+    const { data } = await api.getProductsBySearch(searchString);
+    dispatch({ type: "PRODUCTS_BY_SEARCH", payload: data.products });
   } catch (error) {
     console.log(error);
   }

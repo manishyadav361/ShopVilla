@@ -28,7 +28,12 @@ export const updateProduct = (formData, id) =>
   API.patch(`/products/${id}`, formData);
 
 export const getCart = () => API.get("/cart");
+export const getProductsBySearch = (searchString) =>
+  API.get(`/products/search?searchString=${searchString}`);
+
 export const createCart = (productId, price) =>
   API.post("/cart", { productId, price });
 export const removeCart = (productId, price) =>
   API.patch("/cart", { productId, price });
+export const removeCartItem = (productId) =>
+  API.patch("/cart/remove", { productId });

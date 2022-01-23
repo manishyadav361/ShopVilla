@@ -15,6 +15,13 @@ const reducer = (
         loading: false,
         error: "",
       };
+    case "PRODUCTS_BY_SEARCH":
+      return {
+        ...state,
+        products: action.payload,
+        loading: false,
+        error: null,
+      };
     case "INSERT_PRODUCT":
       state?.products?.push(action?.payload);
 

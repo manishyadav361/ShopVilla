@@ -5,7 +5,6 @@ import useStyles from "./ProfileStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../actions/Auth";
 import { useNavigate } from "react-router-dom";
-import Loader from "../Loader/Loader";
 function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -25,7 +24,6 @@ function Profile() {
 
   return (
     <Container className={classes.container}>
-      {state?.loading && <Loader />}
       <Avatar className={classes.avatar} src={updatedData?.imageUrl} />
       <TextField
         name="username"

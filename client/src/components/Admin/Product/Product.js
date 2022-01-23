@@ -56,7 +56,7 @@ function Product() {
 
   useEffect(() => {
     if (product) {
-      setFormData({ ...product, brandName: "Adidas" });
+      setFormData({ ...product });
     } else {
       setFormData(initialState);
     }
@@ -75,8 +75,7 @@ function Product() {
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
-            value={formData?.title || ""}
-            autoFocus={true}
+            value={formData?.title ?? ""}
             variant="filled"
           />
 
@@ -87,7 +86,6 @@ function Product() {
               setFormData({ ...formData, price: e.target.value })
             }
             value={formData?.price || ""}
-            autoFocus={true}
           />
           <TextField
             label="Offer"
@@ -96,7 +94,6 @@ function Product() {
               setFormData({ ...formData, offerPercentage: e.target.value })
             }
             value={formData?.offerPercentage || ""}
-            autoFocus={true}
           />
           <TextField
             label="BrandName"
@@ -104,7 +101,6 @@ function Product() {
               setFormData({ ...formData, brandName: e.target.value })
             }
             value={formData?.brandName || ""}
-            autoFocus={true}
           />
 
           <TextField
@@ -113,7 +109,6 @@ function Product() {
               setFormData({ ...formData, description: e.target.value })
             }
             value={formData?.description || ""}
-            autoFocus={true}
           />
           <TextField
             label="Quantity"
@@ -122,7 +117,6 @@ function Product() {
               setFormData({ ...formData, quantity: e.target.value })
             }
             value={formData?.quantity || ""}
-            autoFocus={true}
           />
           <TextField
             label="Colors"
@@ -131,7 +125,6 @@ function Product() {
               setFormData({ ...formData, colors: e.target?.value?.split(",") })
             }
             value={formData?.colors || ""}
-            autoFocus={true}
           />
           <TextField
             label="Category"
@@ -139,7 +132,6 @@ function Product() {
               setFormData({ ...formData, category: e.target.value })
             }
             value={formData?.category || ""}
-            autoFocus={true}
           />
           <TextField
             label="Material"
@@ -151,7 +143,6 @@ function Product() {
               })
             }
             value={formData?.material || ""}
-            autoFocus={true}
           />
           <TextField
             label="Keywords"
@@ -163,7 +154,6 @@ function Product() {
               })
             }
             value={formData?.keywords || ""}
-            autoFocus={true}
           />
           <TextField
             label="Warranty"
@@ -171,7 +161,6 @@ function Product() {
               setFormData({ ...formData, warranty: e.target?.value })
             }
             value={formData?.warranty || ""}
-            autoFocus={true}
           />
           <TextField
             label="Shipping Fee"
@@ -180,7 +169,6 @@ function Product() {
               setFormData({ ...formData, shipping: e.target?.value })
             }
             value={formData?.shipping || ""}
-            autoFocus={true}
           />
           <Input
             endAdornment={
