@@ -60,6 +60,10 @@ function Header() {
     }
   }, [location]);
 
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
   return (
     <Container className={classes.header}>
       <Container className={classes.container}>

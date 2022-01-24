@@ -12,6 +12,12 @@ export default makeStyles((theme) => ({
       alignItems: "flex-start",
     },
   },
+  productError: {
+    height: "120px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   cart: {
     background: "#1a1a1a",
     color: "white",

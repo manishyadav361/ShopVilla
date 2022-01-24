@@ -10,6 +10,16 @@ export const getAllProducts = () => async (dispatch) => {
   }
 };
 
+export const getProduct = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "START_LOADING" });
+    const { data } = await api.getProduct(id);
+    dispatch({ type: "GET_PRODUCT", payload: data.product });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getProductsBySearch = (searchString) => async (dispatch) => {
   try {
     dispatch({ type: "START_LOADING" });

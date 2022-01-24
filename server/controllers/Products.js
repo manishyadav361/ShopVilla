@@ -13,6 +13,17 @@ export const getProducts = async (req, res) => {
   }
 };
 
+export const getProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await ProductsModel.findById(id);
+    res.status(200).json({ product: product });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong!!");
+  }
+};
+
 export const getProductsBySearch = async (req, res) => {
   const { searchString } = req.query;
   const searchArray = searchString.split(" ");
@@ -47,7 +58,7 @@ export const deleteProduct = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send("Cannot find product with id ", productId);
 
-    const product = await ProductsModel.findOneAndDelete({ id });
+    const product = await ProductsModel.findByIdAndDelete(id);
     res.status(200).json({ product: product });
   } catch (error) {
     res.status(500).send("something went wrong!!");

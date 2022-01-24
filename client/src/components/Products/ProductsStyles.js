@@ -1,30 +1,11 @@
 import { makeStyles } from "@material-ui/core";
 export default makeStyles((theme) => ({
-  loader: {
-    position: "absolute",
-    zIndex: "100",
-    height: "100vh",
-    width: "100%",
-    background: "grey",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
   container: {
     width: "100%",
-    minHeight: "100vh",
     padding: "0",
     minWidth: "100%",
     margin: "0",
     background: "#1a1a1a",
-
-    position: "relative",
-    // display: "flex",
-    // flexDirection: "column",
-    height: "100vh",
-    overflow: "hidden",
-    overflowY: "scroll",
   },
   product: {
     display: "flex",
@@ -37,7 +18,6 @@ export default makeStyles((theme) => ({
   },
 
   top: {
-    // background: "white",
     background: "lightblue",
     height: "200px",
     minWidth: "100%",
@@ -49,6 +29,7 @@ export default makeStyles((theme) => ({
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    cursor: "pointer",
   },
   imageBox: {
     width: "200px",
@@ -79,6 +60,8 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   products: {
+    position: "relative",
+    padding: "20px 0px",
     minHeight: "100vh",
     width: "100%",
     display: "grid",
@@ -86,7 +69,6 @@ export default makeStyles((theme) => ({
     gridTemplateColumns: "45% 45%",
     justifyContent: "space-around",
     margin: "0px auto",
-    padding: "20px 0px",
     gridGap: "10px",
     [theme.breakpoints.down("sm")]: {
       gridTemplateColumns: "90%",
@@ -95,6 +77,7 @@ export default makeStyles((theme) => ({
       gridTemplateColumns: "45% 45%",
     },
     [theme.breakpoints.between("md", "xl")]: {
+      overflowX: "scroll",
       gridTemplateColumns: "250px 250px 250px 250px ",
     },
     background: "#1a1a1a",

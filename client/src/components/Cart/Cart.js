@@ -13,9 +13,9 @@ function Cart() {
   const cartProducts = state?.Cart?.cart?.products;
   const { loading } = useSelector((state) => state?.Products);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllProducts());
+  // }, [dispatch]);
 
   return (
     <Container className={classes.container}>

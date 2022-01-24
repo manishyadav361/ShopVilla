@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Container } from "@material-ui/core";
 import React, { useEffect } from "react";
 import useStyles from "./ProductsStyles";
-
+import Header from "../Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "./Product";
 import { getAllProducts } from "../../actions/Products";
@@ -12,9 +12,9 @@ function Products() {
   const { products, loading } = useSelector((state) => state.Products);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllProducts());
+  // }, [dispatch]);
 
   return (
     <Container className={classes.container}>

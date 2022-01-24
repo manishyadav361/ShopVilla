@@ -4,14 +4,19 @@ import useStyles from "./ProductsStyles";
 import StarIcon from "@material-ui/icons/Star";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { useDispatch } from "react-redux";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import { createCart } from "../../actions/Cart";
+import { useNavigate } from "react-router-dom";
+import { getProduct } from "../../actions/Products";
 function Product({ productId, rating, coverImage, title, price }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const addToCart = () => {
     dispatch(createCart(productId, price));
+  };
+  const showProduct = () => {
+    dispatch(getProduct(productId));
+    navigate(`/products/${productId}`);
   };
 
   return (
@@ -19,6 +24,7 @@ function Product({ productId, rating, coverImage, title, price }) {
       <Box
         style={{ backgroundImage: `url(${coverImage})` }}
         className={classes.top}
+        onClick={showProduct}
       >
         <Box>
           <IconButton>

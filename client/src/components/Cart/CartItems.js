@@ -30,11 +30,23 @@ function CartItems({ id, total, quantity, loading }) {
   const toggleLike = () => {
     setLike(!like);
   };
+  if (loading) {
+    return <CartSkeleton />;
+  }
 
   return (
     <Box className={classes.cartItem}>
-      {loading ? (
-        <CartSkeleton />
+      {!cartItem ? (
+        <Box className={classes.productError}>
+          <Typography>Product is no longer available</Typography>
+          <IconButton
+            variant="contained"
+            color="secondary"
+            onClick={removeItem}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Box>
       ) : (
         <>
           <Box

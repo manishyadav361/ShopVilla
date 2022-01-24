@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./AuthStyles";
 import GoogleLogin from "react-google-login";
 import GoogleLogo from "../../images/google-logo-9824.png";
-import Spinner from "../../images/Spinner-1s-200px (2).gif";
 import { signUp, signIn } from "../../actions/Auth";
 import Loader from "../Loader";
 function Auth() {
@@ -54,12 +53,10 @@ function Auth() {
     history("/");
   };
 
-  console.log(state);
-
   return (
     <>
       <Container className={classes.container}>
-        {state.loading && <Loader />}
+        {state?.auth?.loading && <Loader />}
         <Box className={classes.logo}></Box>
         {toggle && (
           <TextField

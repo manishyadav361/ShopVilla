@@ -13,7 +13,7 @@ function SearchProducts() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const classes = useStyles();
-  const { products, loading } = useSelector((state) => state?.Products);
+  const { searchProducts, loading } = useSelector((state) => state?.Products);
   const query = searchParams?.get("searchString")?.split(" ")?.join("+");
 
   useEffect(() => {
@@ -22,13 +22,13 @@ function SearchProducts() {
     } else {
       navigate("/products");
     }
-  }, []);
+  }, [location]);
 
   return (
     <div>
       <Box className={classes.products}>
         {loading && <Loader />}
-        {products?.map((product) => (
+        {searchProducts?.map((product) => (
           <Product
             key={product?._id}
             title={product?.title}

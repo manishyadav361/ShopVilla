@@ -9,6 +9,7 @@ import AdminProducts from "./components/Admin/Product/AdminProducts/AdminProduct
 import Admin from "./components/Admin/Product/Admin/Admin";
 import Cart from "./components/Cart/Cart";
 import SearchProducts from "./components/SearchProducts/SearchProducts";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 function App() {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -67,6 +68,15 @@ function App() {
               <>
                 <Header />
                 <Cart />
+              </>
+            }
+          />
+          <Route
+            exact
+            path={"/products/:id"}
+            element={
+              <>
+                <ProductDetails />
               </>
             }
           />
