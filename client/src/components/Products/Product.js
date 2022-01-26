@@ -12,7 +12,7 @@ function Product({ productId, rating, coverImage, title, price }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const addToCart = () => {
-    dispatch(createCart(productId, price));
+    dispatch(createCart(productId, price, coverImage, price, title));
   };
   const showProduct = () => {
     dispatch(getProduct(productId));

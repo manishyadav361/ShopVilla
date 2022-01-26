@@ -1,7 +1,4 @@
-const reducer = (
-  state = { auth: null, error: null, loading: false },
-  action
-) => {
+const reducer = (state = { auth: null, error: null }, action) => {
   switch (action.type) {
     case "START_LOADING":
       return {

@@ -45,6 +45,11 @@ export default makeStyles((theme) => ({
     borderRadius: "10px",
     margin: "10px",
     boxShadow: "0px 0px 20px rgba(255,255,255,0.2)",
+    cursor: "pointer",
+    "&:active": {
+      transform: `scale(0.9)`,
+      transition: "all 1s ease-in",
+    },
   },
   infoBox: {
     width: "100%",

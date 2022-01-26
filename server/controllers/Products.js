@@ -26,16 +26,18 @@ export const getProduct = async (req, res) => {
 
 export const getProductsBySearch = async (req, res) => {
   const { searchString } = req.query;
-  const searchArray = searchString.split(" ");
-  const title = new RegExp(searchString, "i");
+  const { relatedSearch } = req.body;
+
+  const searchArray = searchString.split(" ") || relatedSearch.split(" ");
+  const title = new RegExp(searchString || relatedSearch, "i");
   try {
     const products = await ProductsModel.find({
-      $or: [{ title }, { keywords: { $in: searchArray } }],
+      $or: [{ title }, { keywords: { $in: searchArray } }, { category: title }],
     });
     res.status(200).json({ products: products });
   } catch (error) {
-    console.log(error);
     res.status(500).send("something went wrong");
+    console.log(error);
   }
 };
 

@@ -61,7 +61,11 @@ function Header() {
   }, [location]);
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    if (user) {
+      dispatch(getAllProducts());
+    } else {
+      navigate("/auth");
+    }
   }, [dispatch]);
 
   return (

@@ -8,6 +8,11 @@ const reducer = (
         ...state,
         loading: true,
       };
+    case "STOP_LOADING":
+      return {
+        ...state,
+        loading: false,
+      };
     case "GET_ALL_PRODUCTS":
       return {
         ...state,

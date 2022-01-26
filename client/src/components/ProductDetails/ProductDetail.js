@@ -1,11 +1,27 @@
-import { Box, Container, IconButton, Typography } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import useStyles from "./styles";
+import RelatedProducts from "./RelatedProducts";
 
 function ProductDetail({ product }) {
   const classes = useStyles();
+  const table = [
+    { head: "Brand", text: product?.brandName || "N/A" },
+    { head: "Category", text: product?.category || "N/A" },
+    { head: "Warranty", text: product?.warranty || "N/A" },
+  ];
 
   return (
     <Container className={classes.detailContainer}>
@@ -40,10 +56,10 @@ function ProductDetail({ product }) {
       </Box>
       <Box className={classes.title}>
         <Typography className={classes.name} variant="h5" color="inherit">
-          Specification
+          Description
         </Typography>
         <Box>
-          <Typography>{product?.description}</Typography>
+          <Typography>{product?.description || "None"}</Typography>
         </Box>
       </Box>
 
@@ -53,15 +69,42 @@ function ProductDetail({ product }) {
             <Typography className={classes.name} variant="h5" color="inherit">
               Material
             </Typography>
-            {product?.material.map((m) => (
-              <li>{m}</li>
-            ))}
+            {product?.material.map((m) => {
+              if (m !== "") {
+                return <li key={product?.material.indexOf(m)}>{m}</li>;
+              }
+            })}
           </>
         ) : (
           <Typography className={classes.name} variant="h6" color="inherit">
             None
           </Typography>
         )}
+      </Box>
+      <Box className={classes.title}>
+        <Typography className={classes.name} variant="h5" color="inherit">
+          Specification's
+        </Typography>
+        <Table aria-label="simple table" className={classes.table}>
+          <TableHead>
+            {table.map((box) => (
+              <TableRow className={classes.tableRow} key={table.indexOf(box)}>
+                <TableCell align="center" className={classes.tableData}>
+                  {box.head}
+                </TableCell>
+                <TableCell align="center" className={classes.tableData}>
+                  {box.text}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableHead>
+        </Table>
+      </Box>
+      <Box className={classes.title}>
+        <Typography className={classes.name} variant="h5" color="inherit">
+          Related Products
+        </Typography>
+        <RelatedProducts product={product} />
       </Box>
     </Container>
   );

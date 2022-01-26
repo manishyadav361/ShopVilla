@@ -21,7 +21,10 @@ export const updateUser = (updatedData, id) =>
 
 //  PRODUCTS ROUTES
 export const getProducts = () => API.get("/products");
-export const getProduct = (id) => API.get(`/products/${id}`);
+export const getProduct = (id) => API.get(`/products/product/${id}`);
+export const getProductsBySearch = (searchString) =>
+  API.get(`/products/search?searchString=${searchString}`);
+
 export const insertProduct = (data, id) =>
   API.post(`/products/${id}`, { data });
 
@@ -32,8 +35,6 @@ export const updateProduct = (formData, id) =>
 
 // CART ROUTES
 export const getCart = () => API.get("/cart");
-export const getProductsBySearch = (searchString) =>
-  API.get(`/products/search?searchString=${searchString}`);
 
 export const createCart = (productId, price) =>
   API.post("/cart", { productId, price });

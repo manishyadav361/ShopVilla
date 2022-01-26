@@ -16,7 +16,7 @@ function SearchBar({ classname }) {
 
   const search = () => {
     dispatch(getProductsBySearch(query));
-    navigate(`/products/search?searchString=${query.split(" ").join("+")}`);
+    navigate(`/products/search?searchString=${query?.split(" ").join("+")}`);
   };
   const updateQuery = (e) => {
     if (e.keyCode === 13) {

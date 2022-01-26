@@ -30,7 +30,7 @@ function Auth() {
 
   useEffect(() => {
     if (state.error) {
-      alert(state?.error);
+      console.log(state?.error);
     }
   }, [state]);
 
@@ -38,7 +38,6 @@ function Auth() {
     dispatch(signUp(formData, history));
   };
   const login = () => {
-    dispatch({ type: "START_LOADING" });
     dispatch(signIn(formData, history));
   };
 
@@ -56,7 +55,7 @@ function Auth() {
   return (
     <>
       <Container className={classes.container}>
-        {state?.auth?.loading && <Loader />}
+        {state?.loading && <Loader />}
         <Box className={classes.logo}></Box>
         {toggle && (
           <TextField
