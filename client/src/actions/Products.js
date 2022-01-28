@@ -8,7 +8,7 @@ export const getAllProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({ type: "STOP_LOADING" });
 
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -20,7 +20,7 @@ export const getProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: "STOP_LOADING" });
 
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -44,7 +44,7 @@ export const insertProduct = (formData, id) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: "STOP_LOADING" });
 
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -55,7 +55,7 @@ export const deleteProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: "STOP_LOADING" });
 
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -64,7 +64,7 @@ export const updateProduct = (formData, id) => async (dispatch) => {
     const { data } = await api.updateProduct(formData, id);
     dispatch({ type: "UPDATE_PRODUCT", payload: data?.product });
   } catch (error) {
-    console.log(error);
     dispatch({ type: "STOP_LOADING" });
+    // console.log(error);
   }
 };

@@ -15,7 +15,7 @@ function SearchBar({ classname }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const search = () => {
-    dispatch(getProductsBySearch(query));
+    // dispatch(getProductsBySearch(query));
     navigate(`/products/search?searchString=${query?.split(" ").join("+")}`);
   };
   const updateQuery = (e) => {

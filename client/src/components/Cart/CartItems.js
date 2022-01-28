@@ -48,16 +48,17 @@ function CartItems({ id, total, quantity, loading }) {
   return (
     <Box className={classes.cartItem}>
       {!cartItem ? (
-        <Box className={classes.productError}>
-          <Typography>Product is no longer available</Typography>
-          <IconButton
-            variant="contained"
-            color="secondary"
-            onClick={removeItem}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </Box>
+        // <Box className={classes.productError}>
+        //   <Typography>Product is no longer available</Typography>
+        //   <IconButton
+        //     variant="contained"
+        //     color="secondary"
+        //     onClick={removeItem}
+        //   >
+        //     <DeleteIcon />
+        //   </IconButton>
+        // </Box>
+        <CartSkeleton />
       ) : (
         <>
           <Box

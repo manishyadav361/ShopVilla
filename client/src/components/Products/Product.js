@@ -6,7 +6,6 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { useDispatch } from "react-redux";
 import { createCart } from "../../actions/Cart";
 import { useNavigate } from "react-router-dom";
-import { getProduct } from "../../actions/Products";
 function Product({ productId, rating, coverImage, title, price }) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -15,7 +14,6 @@ function Product({ productId, rating, coverImage, title, price }) {
     dispatch(createCart(productId, price, coverImage, price, title));
   };
   const showProduct = () => {
-    dispatch(getProduct(productId));
     navigate(`/products/${productId}`);
   };
 

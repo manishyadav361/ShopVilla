@@ -114,4 +114,38 @@ export default makeStyles((theme) => ({
     color: "rgba(0,0,0,0.8)",
     textTransform: "capitalize",
   },
+  filter: {
+    width: "100%",
+    padding: "20px 0px 10px 0px ",
+    display: "flex",
+    justifyContent: "center",
+
+    overflowY: "hidden",
+    background: "#1a1a1a",
+  },
+  filterOption: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "0 auto",
+    zIndex: "90",
+  },
+  fBtn: {
+    margin: "0px 10px",
+  },
+  closeModal: {
+    minHeight: "30vh",
+    width: "90%",
+    background: "#1a1a1a",
+    transform: "translateY(-120%)",
+    transition: "0.2s ease-in",
+    borderRadius: "3px",
+    position: "absolute",
+    zIndex: "90",
+    boxShadow: "3px 3px 20px rgba(0,0,0,1)",
+  },
+  openModal: {
+    transform: "translateY(0%)",
+  },
 }));

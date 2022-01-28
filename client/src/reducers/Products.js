@@ -1,5 +1,11 @@
 const reducer = (
-  state = { products: null, loading: false, error: null },
+  state = {
+    products: null,
+    searchProducts: null,
+    product: null,
+    loading: false,
+    error: null,
+  },
   action
 ) => {
   switch (action.type) {
@@ -17,6 +23,8 @@ const reducer = (
       return {
         ...state,
         products: action.payload,
+        product: null,
+        searchProducts: null,
         loading: false,
         error: "",
       };
@@ -66,7 +74,13 @@ const reducer = (
         error: "",
       };
     default:
-      return state;
+      return {
+        ...state,
+        product: null,
+        searchProducts: null,
+        loading: false,
+        error: null,
+      };
   }
 };
 

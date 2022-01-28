@@ -6,8 +6,10 @@ export default makeStyles((theme) => ({
     margin: "0",
     minWidth: "100%",
     height: "100vh",
-    background: "white",
+    background: "#1a1a1a",
     color: "#f6f6f6",
+    position: "relative",
+    width: "100%",
   },
   imageBox: {
     minWidth: "300px",
@@ -23,7 +25,14 @@ export default makeStyles((theme) => ({
       height: "400px",
     },
   },
+  backBtn: {
+    position: "absolute",
+    left: "1%",
+    top: "1%",
+  },
   detailContainer: {
+    transition: "all 1s ease",
+
     minWidth: "100%",
     padding: "0px 15px",
     margin: "0",
@@ -48,6 +57,7 @@ export default makeStyles((theme) => ({
     padding: "2px",
     background: "lightblue",
     borderRadius: "5px",
+    cursor: "pointer",
   },
   barBox: {
     width: "100%",
@@ -78,8 +88,13 @@ export default makeStyles((theme) => ({
   tableData: {
     color: "white",
     background: "rgba(255,255,255,0.02)",
-    borderBottom: "1px solid rgba(255,255,255,0.1)",
+    borderBottom: "0.5px solid rgba(255,255,255,0.1)",
   },
+
+  tableRow: {
+    color: "white",
+  },
+
   relatedTitle: {
     display: "flex",
     alignItems: "center",
@@ -96,11 +111,18 @@ export default makeStyles((theme) => ({
     backgroundPosition: "center",
     borderRadius: "10px",
     background: "lightblue",
+    "&:hover": {
+      boxShadow: "8px 8px 30px rgba(0,0,0,0.9)",
+      transform: "scale(0.96)",
+      transition: "all 0.3s ease-out",
+    },
   },
   relatedProducts: {
     display: "flex",
-    overflowY: "scroll",
+    overflowY: "hidden",
+    overflowX: "scroll",
     alignItems: "center",
+
     "&::-webkit-scrollbar": {
       display: "none",
     },
@@ -109,6 +131,7 @@ export default makeStyles((theme) => ({
     padding: "10px",
     marginRight: "15px",
     cursor: "pointer",
+    width: "150px",
   },
   relatedText: {
     fontSize: "12px",
@@ -119,5 +142,10 @@ export default makeStyles((theme) => ({
   },
   price: {
     fontSize: "12px",
+  },
+  toggle: {
+    // position: "absolute",
+    // top: "0%",
+    transform: `translateY(-250px)`,
   },
 }));

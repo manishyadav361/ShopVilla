@@ -1,25 +1,40 @@
 import { Box } from "@material-ui/core";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsBySearch } from "../../actions/Products";
 import RelatedProduct from "./RelatedProduct";
 import useStyles from "./styles";
+import CartSkeleton from "../Skeleton/CartSkeleton";
 
 function RelatedProducts() {
-  const { searchProducts } = useSelector((state) => state.Products);
+  const { product, searchProducts, loading } = useSelector(
+    (state) => state.Products
+  );
+
+  const relatedSearch = product?.keywords.join(" ") + " " + product?.brandName;
   const classes = useStyles();
-  console.log(searchProducts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductsBySearch(relatedSearch));
+  }, [dispatch, relatedSearch]);
 
   return (
     <Box className={classes.relatedProducts}>
-      {searchProducts?.map((product) => (
-        <RelatedProduct
-          key={product?._id}
-          price={product?.price}
-          title={product?.title}
-          coverImage={product?.coverImage}
-          id={product?._id}
-        />
-      ))}
+      {loading ? (
+        <CartSkeleton />
+      ) : (
+        <>
+          {searchProducts?.map((product) => (
+            <RelatedProduct
+              key={product?._id}
+              price={product?.price}
+              title={product?.title}
+              coverImage={product?.coverImage}
+              id={product?._id}
+            />
+          ))}
+        </>
+      )}
     </Box>
   );
 }

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getProduct } from "../../actions/Products";

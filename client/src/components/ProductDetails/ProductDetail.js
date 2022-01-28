@@ -3,7 +3,6 @@ import {
   Container,
   IconButton,
   Table,
-  TableBody,
   TableCell,
   TableHead,
   TableRow,
@@ -14,19 +13,32 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import useStyles from "./styles";
 import RelatedProducts from "./RelatedProducts";
+import { useLocation } from "react-router-dom";
 
-function ProductDetail({ product }) {
+function ProductDetail({ product, loading }) {
+  const [toggle, setToggle] = React.useState(false);
   const classes = useStyles();
+  const location = useLocation();
   const table = [
     { head: "Brand", text: product?.brandName || "N/A" },
     { head: "Category", text: product?.category || "N/A" },
     { head: "Warranty", text: product?.warranty || "N/A" },
   ];
 
+  React.useEffect(() => {
+    setToggle(false);
+  }, [location]);
+
   return (
-    <Container className={classes.detailContainer}>
+    <Container
+      className={
+        !toggle
+          ? `${classes.detailContainer}`
+          : `${classes.detailContainer} ${classes.toggle}`
+      }
+    >
       <Box className={classes.barBox}>
-        <Box className={classes.bar}></Box>
+        <Box className={classes.bar} onClick={() => setToggle(!toggle)}></Box>
       </Box>
       <Box className={classes.title}>
         <Typography className={classes.name} variant="h5">

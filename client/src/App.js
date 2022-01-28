@@ -10,9 +10,17 @@ import Admin from "./components/Admin/Product/Admin/Admin";
 import Cart from "./components/Cart/Cart";
 import SearchProducts from "./components/SearchProducts/SearchProducts";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllProducts } from "./actions/Products";
 function App() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
+  useEffect(() => {
+    dispatch({ type: "START_LOADING" });
+    dispatch(getAllProducts());
+  }, [user]);
 
   return (
     <BrowserRouter>

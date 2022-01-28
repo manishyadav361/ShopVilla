@@ -8,6 +8,8 @@ export const signIn = (formData, history) => async (dispatch) => {
     history("/");
   } catch (error) {
     dispatch({ type: "SIGNIN", error: error?.response?.data });
+    dispatch({ type: "STOP_LOADING" });
+
     history("/auth");
   }
 };
@@ -20,6 +22,7 @@ export const signUp = (data) => async (dispatch) => {
     dispatch({ type: "SIGNIN", payload: result });
   } catch (error) {
     dispatch({ type: "SIGNIN", error: error.response.data });
+    dispatch({ type: "STOP_LOADING" });
   }
 };
 
@@ -31,6 +34,8 @@ export const updateUser = (updatedData, id, navigate) => async (dispatch) => {
     dispatch({ type: "SIGNIN", payload: data });
   } catch (error) {
     console.log(error);
+    dispatch({ type: "STOP_LOADING" });
+
     dispatch({ type: "SIGNIN", error: error?.response?.data });
     navigate("/auth");
   }

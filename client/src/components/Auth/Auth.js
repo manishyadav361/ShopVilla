@@ -55,7 +55,7 @@ function Auth() {
   return (
     <>
       <Container className={classes.container}>
-        {state?.loading && <Loader />}
+        {state?.auth?.loading && <Loader />}
         <Box className={classes.logo}></Box>
         {toggle && (
           <TextField

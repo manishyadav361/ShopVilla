@@ -37,14 +37,18 @@ function Header() {
     dispatch({ type: "LOGOUT" });
     navigate("/auth");
   };
-
+  useEffect(() => {
+    if (user) {
+      dispatch({ type: "RESET_PRODUCT_STATE" });
+    }
+  }, []);
   useEffect(() => {
     if (user) {
       dispatch(getCart());
     } else {
-      navigate("/auth");
+      logout();
     }
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
@@ -59,14 +63,6 @@ function Header() {
       }
     }
   }, [location]);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(getAllProducts());
-    } else {
-      navigate("/auth");
-    }
-  }, [dispatch]);
 
   return (
     <Container className={classes.header}>

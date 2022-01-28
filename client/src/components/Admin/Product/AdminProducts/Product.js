@@ -28,7 +28,6 @@ function Product({ coverImage, title, id, inStock, price }) {
   };
   const deleteItem = () => {
     dispatch(deleteProduct(id));
-    console.log(id);
   };
   return (
     <Box className={classes.product}>

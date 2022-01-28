@@ -1,24 +1,19 @@
-import { Box, CircularProgress, Container } from "@material-ui/core";
-import React, { useEffect } from "react";
+import { Box, Container } from "@material-ui/core";
+import React from "react";
 import useStyles from "./ProductsStyles";
-import Header from "../Header/Header";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Product from "./Product";
-import { getAllProducts } from "../../actions/Products";
 import Loader from "../Loader";
+import FilterOption from "./FilterOption";
 
 function Products() {
   const classes = useStyles();
   const { products, loading } = useSelector((state) => state.Products);
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getAllProducts());
-  // }, [dispatch]);
 
   return (
     <Container className={classes.container}>
       {loading && <Loader />}
+      <FilterOption />
       <Box className={classes.products}>
         {products?.map((product) => (
           <Product
