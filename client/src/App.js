@@ -17,10 +17,6 @@ function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
-  useEffect(() => {
-    dispatch({ type: "START_LOADING" });
-    dispatch(getAllProducts());
-  }, [user]);
 
   return (
     <BrowserRouter>

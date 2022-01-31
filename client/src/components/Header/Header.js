@@ -64,6 +64,11 @@ function Header() {
     }
   }, [location]);
 
+  useEffect(() => {
+    dispatch({ type: "START_LOADING" });
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
   return (
     <Container className={classes.header}>
       <Container className={classes.container}>

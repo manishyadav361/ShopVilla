@@ -4,7 +4,6 @@ import useStyles from "./ProductsStyles";
 import { useSelector } from "react-redux";
 import Product from "./Product";
 import Loader from "../Loader";
-import FilterOption from "./FilterOption";
 
 function Products() {
   const classes = useStyles();
@@ -13,7 +12,6 @@ function Products() {
   return (
     <Container className={classes.container}>
       {loading && <Loader />}
-      <FilterOption />
       <Box className={classes.products}>
         {products?.map((product) => (
           <Product

@@ -3,6 +3,9 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 const secret = "test";
+import fs from "fs";
+import path from "path";
+import { unlink } from "../index.js";
 
 export const signIn = async (req, res) => {
   const { email, password } = req.body;
@@ -49,21 +52,29 @@ export const signUp = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const { username, imageUrl } = req.body;
+  const { username, imageToDelete } = req.body;
   const { id } = req.params;
   try {
+    const file = req?.file;
+    const fileName = file?.filename;
+    const basePath = `${req?.protocol}://${req?.get("host")}/public/uploads/`;
+
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send("cannot find user ");
     const result = await UserModel.findByIdAndUpdate(
       id,
-      { username, imageUrl, _id: id },
+      { username, imageUrl: file && `${basePath}${fileName}`, _id: id },
       { new: true }
     );
+    if (file) {
+      unlink(imageToDelete);
+    }
     const token = jwt.sign({ email: result?.email, id: result?._id }, secret, {
       expiresIn: "1h",
     });
     res.status(200).json({ result: result, token });
   } catch (error) {
+    console.log(error);
     res.status(500).send("something went wrong");
   }
 };
