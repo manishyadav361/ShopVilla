@@ -7,7 +7,7 @@ function Admin({ user }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

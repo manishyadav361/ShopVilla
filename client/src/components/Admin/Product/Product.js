@@ -36,22 +36,38 @@ function Product() {
     category: "",
     material: "",
     keywords: "",
-    warranty: 0,
-    shipping: 0,
-    inStock: false,
-    freeShipping: false,
+    warranty: 0 || "",
+    shipping: 0 || "",
+    inStock: false || "",
+    freeShipping: false || "",
   };
 
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState(initialState);
 
-  const uploadProduct = () => {
-    dispatch(
-      insertProduct(formData, user?.result?._id || user?.result?.googleId)
-    );
+  const form = new FormData();
+  // form.append("title", formData?.title);
+  // form.append("image", formData?.coverImage);
+  // form.append("price", formData?.price);
+  // form.append("offerPercentage", formData?.offerPercentage);
+  // form.append("brandName", formData?.brandName);
+  // form.append("description", form?.description);
+  // form.append("quantity", formData?.quantity);
+  // form.append("colors", formData?.colors);
+
+  for (const [key, value] of Object.entries(formData)) {
+    form.append(key, value);
+  }
+  let index = product?.coverImage.lastIndexOf("/");
+  let imageToUpdate = product?.coverImage.slice(index + 1);
+  form.append("imageToUpdate", imageToUpdate);
+
+  const uploadProduct = (e) => {
+    e.preventDefault();
+    dispatch(insertProduct(form, user?.result?._id || user?.result?.googleId));
   };
 
   const update = () => {
-    dispatch(updateProduct(formData, params?.id));
+    dispatch(updateProduct(form, params?.id));
   };
 
   useEffect(() => {
@@ -173,11 +189,12 @@ function Product() {
           <Input
             endAdornment={
               <InputAdornment position="end">
-                <FileBase
+                <input
                   className={classes.file}
                   type="file"
-                  onDone={({ base64 }) =>
-                    setFormData({ ...formData, coverImage: base64 })
+                  name="coverImage"
+                  onChange={(e) =>
+                    setFormData({ ...formData, coverImage: e.target.files[0] })
                   }
                 />
               </InputAdornment>
@@ -214,6 +231,7 @@ function Product() {
             onClick={uploadProduct}
             variant="contained"
             className={classes.submit}
+            type="button"
           >
             Submit
           </Button>
@@ -222,6 +240,7 @@ function Product() {
             onClick={update}
             variant="contained"
             className={classes.submit}
+            type="button"
           >
             Update
           </Button>

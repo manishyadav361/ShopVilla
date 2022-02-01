@@ -48,9 +48,9 @@ export const insertProduct = (formData, id) => async (dispatch) => {
   }
 };
 
-export const deleteProduct = (id) => async (dispatch) => {
+export const deleteProduct = (id, imageToUpdate) => async (dispatch) => {
   try {
-    const { data } = await api.deleteProduct(id);
+    const { data } = await api.deleteProduct(id, imageToUpdate);
     dispatch({ type: "DELETE_PRODUCT", payload: data.product });
   } catch (error) {
     dispatch({ type: "STOP_LOADING" });

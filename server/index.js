@@ -15,10 +15,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 export const unlink = (image) => {
-  fs.unlink(path.resolve("../client/public/uploads") + `/${image}`, (err) => {
+  let filePath = path.resolve("../client/public/uploads") + `/${image}`;
+  fs.access(filePath, (err) => {
     if (err) {
       console.log(err);
+      return;
     }
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        return;
+      }
+    });
   });
 };
 

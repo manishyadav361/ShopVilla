@@ -25,10 +25,13 @@ export const getProduct = (id) => API.get(`/products/product/${id}`);
 export const getProductsBySearch = (searchString) =>
   API.get(`/products/search?searchString=${searchString}`);
 
-export const insertProduct = (data, id) =>
-  API.post(`/products/${id}`, { data });
+export const insertProduct = (data, id) => API.post(`/products/${id}`, data);
 
-export const deleteProduct = (id) => API.delete(`/products/${id}`);
+export const deleteProduct = (id, imageToUpdate) => {
+  API.delete(`/products/${id}`, {
+    data: { imageToUpdate },
+  });
+};
 
 export const updateProduct = (formData, id) =>
   API.patch(`/products/${id}`, formData);

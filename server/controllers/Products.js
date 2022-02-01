@@ -1,5 +1,6 @@
 import ProductsModel from "../Models/Products.js";
 import mongoose from "mongoose";
+import { unlink } from "../index.js";
 
 export const getProducts = async (req, res) => {
   if (!req.userId) {
@@ -46,7 +47,19 @@ export const insertProduct = async (req, res) => {
   const { userId } = req;
 
   try {
-    const product = await ProductsModel.create({ ...data, createdBy: userId });
+    const file = req.file;
+    const fileName = file?.filename;
+    const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+    if (!file) {
+      console.log("file not present");
+    }
+
+    const product = await ProductsModel.create({
+      ...data,
+      coverImage: file && `${basePath}${fileName}`,
+      createdBy: userId,
+    });
+
     res.status(200).json({ product: product });
   } catch (error) {
     res.status(500).send("something went wrong!!");
@@ -55,12 +68,13 @@ export const insertProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
-
+  const { imageToUpdate } = req?.body;
   try {
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send("Cannot find product with id ", productId);
 
     const product = await ProductsModel.findByIdAndDelete(id);
+    unlink(imageToUpdate);
     res.status(200).json({ product: product });
   } catch (error) {
     res.status(500).send("something went wrong!!");
@@ -72,6 +86,10 @@ export const updateProduct = async (req, res) => {
   const { id } = req.params;
 
   try {
+    const file = req.file;
+    const fileName = file?.filename;
+    const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+
     if (!req.userId) {
       res.status(400).send("Access Denied !!");
     }
@@ -79,11 +97,12 @@ export const updateProduct = async (req, res) => {
       return res.status(404).send("cannot find product with id:", productId);
     const product = await ProductsModel.findByIdAndUpdate(
       id,
-      { ...formData, _id: id },
+      { ...formData, coverImage: file && `${basePath}${fileName}`, _id: id },
       {
         new: true,
       }
     );
+    unlink(req.body?.imageToUpdate);
     res.status(200).json({ product: product });
   } catch (error) {
     console.log(error);

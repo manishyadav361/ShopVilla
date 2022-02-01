@@ -26,8 +26,11 @@ function Product({ coverImage, title, id, inStock, price }) {
   const handleSelect = () => {
     setSelect(!select);
   };
+
+  let index = coverImage?.lastIndexOf("/") + 1;
+  let imageToUpdate = coverImage.slice(index);
   const deleteItem = () => {
-    dispatch(deleteProduct(id));
+    dispatch(deleteProduct(id, imageToUpdate));
   };
   return (
     <Box className={classes.product}>
