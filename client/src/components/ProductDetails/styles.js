@@ -85,15 +85,6 @@ export default makeStyles((theme) => ({
     marginBottom: "15px",
     padding: "2px 0px",
   },
-  tableData: {
-    color: "white",
-    background: "rgba(255,255,255,0.02)",
-    borderBottom: "0.5px solid rgba(255,255,255,0.1)",
-  },
-
-  tableRow: {
-    color: "white",
-  },
 
   relatedTitle: {
     display: "flex",
@@ -144,8 +135,6 @@ export default makeStyles((theme) => ({
     fontSize: "12px",
   },
   toggle: {
-    // position: "absolute",
-    // top: "0%",
     transform: `translateY(-250px)`,
   },
 }));

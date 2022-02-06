@@ -28,7 +28,7 @@ function Product({ coverImage, title, id, inStock, price }) {
   };
 
   let index = coverImage?.lastIndexOf("/") + 1;
-  let imageToUpdate = coverImage.slice(index);
+  let imageToUpdate = coverImage?.slice(index);
   const deleteItem = () => {
     dispatch(deleteProduct(id, imageToUpdate));
   };

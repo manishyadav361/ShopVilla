@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     zIndex: "100",
     height: "100vh",
-    background: "rgba(0,0,0,0.5)",
+    background: "rgba(0,0,0,0.3)",
     overflow: "hidden",
     top: "0%",
   },

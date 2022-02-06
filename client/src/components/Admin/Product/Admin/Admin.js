@@ -8,7 +8,6 @@ function Admin({ user }) {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-
   return (
     <>
       <AdminNavBar />

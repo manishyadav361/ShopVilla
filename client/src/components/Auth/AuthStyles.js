@@ -3,7 +3,7 @@ import Logo from "../../images/storeLogo.png";
 export default makeStyles((theme) => ({
   container: {
     padding: "0px",
-    height: "100vh",
+    minHeight: "100vh",
     width: "100%",
     display: "flex",
     flexDirection: "column",
@@ -73,5 +73,6 @@ export default makeStyles((theme) => ({
     margin: "20px 0px",
     color: "rgba(0,0,0,0.8)",
     cursor: "pointer",
+    maxWidth: "80%",
   },
 }));

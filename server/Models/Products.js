@@ -16,7 +16,7 @@ const ProductsSchema = mongoose.Schema({
   createdBy: { type: String },
   quantity: { type: Number },
   warranty: { type: String },
-  shipping: { type: Number },
+  shipping: { type: Number, default: 0 },
   inStock: { type: Boolean },
   freeShipping: { type: Boolean },
 });

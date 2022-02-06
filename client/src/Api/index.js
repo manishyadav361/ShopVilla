@@ -45,3 +45,11 @@ export const removeCart = (productId, price) =>
   API.patch("/cart", { productId, price });
 export const removeCartItem = (productId) =>
   API.patch("/cart/remove", { productId });
+
+// address routes
+
+export const getAddress = (form) => API.get("/address", { form });
+
+export const addAddress = (form) => API.post("/address", { form });
+
+export const updateAddress = (form) => API.patch("/address", { form });

@@ -43,9 +43,11 @@ export const getProductsBySearch = async (req, res) => {
 };
 
 export const insertProduct = async (req, res) => {
-  const { data } = req.body;
+  const data = req.body;
   const { userId } = req;
-
+  const keywords = data?.keywords?.split(",");
+  const material = data?.material?.split(",");
+  const colors = data?.colors?.split(",");
   try {
     const file = req.file;
     const fileName = file?.filename;
@@ -53,13 +55,15 @@ export const insertProduct = async (req, res) => {
     if (!file) {
       console.log("file not present");
     }
-
     const product = await ProductsModel.create({
       ...data,
+      keywords,
+      material,
+      colors,
+      shipping: data?.shipping || 0,
       coverImage: file && `${basePath}${fileName}`,
       createdBy: userId,
     });
-
     res.status(200).json({ product: product });
   } catch (error) {
     res.status(500).send("something went wrong!!");
@@ -84,6 +88,9 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   const formData = req.body;
   const { id } = req.params;
+  const keywords = formData?.keywords?.split(",");
+  const material = formData?.material?.split(",");
+  const colors = formData?.colors?.split(",");
 
   try {
     const file = req.file;
@@ -97,12 +104,21 @@ export const updateProduct = async (req, res) => {
       return res.status(404).send("cannot find product with id:", productId);
     const product = await ProductsModel.findByIdAndUpdate(
       id,
-      { ...formData, coverImage: file && `${basePath}${fileName}`, _id: id },
+      {
+        ...formData,
+        coverImage: file && `${basePath}${fileName}`,
+        keywords,
+        material,
+        colors,
+        _id: id,
+      },
       {
         new: true,
       }
     );
-    unlink(req.body?.imageToUpdate);
+    if (file) {
+      unlink(req.body?.imageToUpdate);
+    }
     res.status(200).json({ product: product });
   } catch (error) {
     console.log(error);

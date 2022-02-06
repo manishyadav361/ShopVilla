@@ -60,6 +60,7 @@ export const deleteProduct = (id, imageToUpdate) => async (dispatch) => {
 };
 
 export const updateProduct = (formData, id) => async (dispatch) => {
+  console.log(formData.get("shipping"));
   try {
     const { data } = await api.updateProduct(formData, id);
     dispatch({ type: "UPDATE_PRODUCT", payload: data?.product });

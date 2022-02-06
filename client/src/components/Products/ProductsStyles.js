@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
     padding: "0",
     minWidth: "100%",
     margin: "0",
-    background: "#1a1a1a",
+    background: "#2f2d2d",
   },
   product: {
     display: "flex",
@@ -80,7 +80,7 @@ export default makeStyles((theme) => ({
       overflowX: "scroll",
       gridTemplateColumns: "250px 250px 250px 250px ",
     },
-    background: "#1a1a1a",
+    background: "#2f2d2d",
     color: "white",
     overflow: "hidden",
     overflowY: "scroll",

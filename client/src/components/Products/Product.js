@@ -1,22 +1,24 @@
-import { Box, Button, IconButton, Typography } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import React from "react";
 import useStyles from "./ProductsStyles";
-import StarIcon from "@material-ui/icons/Star";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { useDispatch } from "react-redux";
 import { createCart } from "../../actions/Cart";
 import { useNavigate } from "react-router-dom";
-function Product({ productId, rating, coverImage, title, price }) {
+
+function Product({ productId, rating, coverImage, title, price, number }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // add items to cart
   const addToCart = () => {
     dispatch(createCart(productId, price, coverImage, price, title));
   };
+
+  // routing to individual product
   const showProduct = () => {
     navigate(`/products/${productId}`);
   };
-
   return (
     <Box className={classes.product}>
       <Box
@@ -24,16 +26,9 @@ function Product({ productId, rating, coverImage, title, price }) {
         className={classes.top}
         onClick={showProduct}
       >
-        <Box>
-          <IconButton>
-            <StarIcon />
-          </IconButton>
-        </Box>
-        <Box>
-          <IconButton>
-            <FavoriteBorderIcon />
-          </IconButton>
-        </Box>
+        <Typography variant="h4" color="secondary">
+          {number}
+        </Typography>
       </Box>
       <Box className={classes.bottom}>
         <Box className={classes.productInfo}>

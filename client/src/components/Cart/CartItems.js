@@ -41,81 +41,85 @@ function CartItems({ id, total, quantity, loading }) {
     navigate(`/products/${id}`);
   };
 
-  if (loading) {
-    return <CartSkeleton />;
-  }
-
   return (
-    <Box className={classes.cartItem}>
-      {!cartItem ? (
-        // <Box className={classes.productError}>
-        //   <Typography>Product is no longer available</Typography>
-        //   <IconButton
-        //     variant="contained"
-        //     color="secondary"
-        //     onClick={removeItem}
-        //   >
-        //     <DeleteIcon />
-        //   </IconButton>
-        // </Box>
-        <CartSkeleton />
-      ) : (
-        <>
-          <Box
-            className={classes.imageBox}
-            style={{ backgroundImage: `url(${cartItem?.coverImage})` }}
-            onClick={routeProduct}
-          ></Box>
-          <Box className={classes.infoBox}>
-            <Box className={classes.info1}>
-              <Typography className={classes.title}>
-                {cartItem.title}
-              </Typography>
-              {like ? (
-                <IconButton
-                  size="small"
-                  onClick={toggleLike}
-                  className={classes.like}
-                >
-                  <FavoriteIcon />
-                </IconButton>
-              ) : (
-                <IconButton color="inherit" onClick={toggleLike} size="small">
-                  <FavoriteBorderIcon />
-                </IconButton>
-              )}
-            </Box>
-            <Box className={classes.info2}>
-              <Typography className={classes.total}>₹ {total}</Typography>
-              <Box className={classes.quantity}>
-                <IconButton
-                  onClick={decrementQuantity}
-                  className={classes.btn}
-                  disabled={quantity > 1 ? false : true}
-                  fontSize="small"
-                >
-                  <IndeterminateCheckBoxIcon />
-                </IconButton>
-                <Typography>{quantity}</Typography>
-                <IconButton className={classes.btn} onClick={incrementQuantity}>
-                  <AddBoxIcon />
-                </IconButton>
-              </Box>
-            </Box>
-            <Box className={classes.remove}>
-              <Button
+    <>
+      <Box className={classes.cartItem}>
+        {!cartItem ? (
+          <>
+            <Box className={classes.productError}>
+              <Typography>Product is no longer available</Typography>
+              <IconButton
                 variant="contained"
-                endIcon={<DeleteIcon />}
                 color="secondary"
                 onClick={removeItem}
               >
-                Remove
-              </Button>
+                <DeleteIcon />
+              </IconButton>
             </Box>
-          </Box>
-        </>
-      )}
-    </Box>
+          </>
+        ) : (
+          // <CartSkeleton />
+          <>
+            {loading && <CartSkeleton />}
+            <Box
+              className={classes.imageBox}
+              style={{ backgroundImage: `url(${cartItem?.coverImage})` }}
+              onClick={routeProduct}
+            ></Box>
+            <Box className={classes.infoBox}>
+              <Box className={classes.info1}>
+                <Typography className={classes.title}>
+                  {cartItem?.title}
+                </Typography>
+                {like ? (
+                  <IconButton
+                    size="small"
+                    onClick={toggleLike}
+                    className={classes.like}
+                  >
+                    <FavoriteIcon />
+                  </IconButton>
+                ) : (
+                  <IconButton color="inherit" onClick={toggleLike} size="small">
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                )}
+              </Box>
+              <Box className={classes.info2}>
+                <Typography className={classes.total}>₹ {total}</Typography>
+                <Box className={classes.quantity}>
+                  <IconButton
+                    onClick={decrementQuantity}
+                    className={classes.btn}
+                    disabled={quantity > 1 ? false : true}
+                    fontSize="small"
+                  >
+                    <IndeterminateCheckBoxIcon />
+                  </IconButton>
+                  <Typography>{quantity}</Typography>
+                  <IconButton
+                    className={classes.btn}
+                    onClick={incrementQuantity}
+                  >
+                    <AddBoxIcon />
+                  </IconButton>
+                </Box>
+              </Box>
+              <Box className={classes.remove}>
+                <Button
+                  variant="contained"
+                  endIcon={<DeleteIcon />}
+                  color="secondary"
+                  onClick={removeItem}
+                >
+                  Remove
+                </Button>
+              </Box>
+            </Box>
+          </>
+        )}
+      </Box>
+    </>
   );
 }
 

@@ -1,8 +1,7 @@
 import { Avatar, Box, Button, Container, TextField } from "@material-ui/core";
-import FileBase from "react-file-base64";
 import React, { useState } from "react";
 import useStyles from "./ProfileStyles";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUser } from "../../actions/Auth";
 import { useNavigate } from "react-router-dom";
 function Profile() {
@@ -10,25 +9,34 @@ function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
+
+  // user input data state
   const [updatedData, setUpdatedData] = useState({
     username: user?.result.name || user?.result?.username,
     imageUrl: user?.result?.imageUrl,
     apartment: "",
   });
 
+  // checks if the the use is authenticated witha custom auth
   const isCustomAuth = user?.token?.length < 500;
-  const image = user?.result?.imageUrl?.slice(37);
-  const formData = new FormData();
-  formData.append("image", updatedData?.imageUrl);
 
+  //
+  const image = user?.result?.imageUrl?.slice(37);
+
+  // holding state as a form data
+  const formData = new FormData();
+
+  formData.append("image", updatedData?.imageUrl);
   formData.append("username", updatedData?.username);
   formData.append("imageToDelete", image);
-  console.log(image);
+
+  // update the user profile , only if the user is not logged with google auth
   const update = (e) => {
     e.preventDefault();
     dispatch({ type: "START_LOADING" });
     dispatch(updateUser(formData, user?.result?._id, navigate));
   };
+
   return (
     <Container className={classes.container}>
       <Avatar className={classes.avatar} src={user?.result?.imageUrl || ""} />
@@ -54,18 +62,10 @@ function Profile() {
         variant="outlined"
       />
       <Box className={classes.imageFile}>
-        {/* <FileBase
-          type="file"
-          multiple={false}
-          // disable={true}
-          value={updatedData.imageUrl}
-          onDone={({ base64 }) =>
-            setUpdatedData({ ...updatedData, imageUrl: base64 })
-          }
-        /> */}
         <input
           type="file"
           name="image"
+          disabled={!isCustomAuth ? true : false}
           onChange={(e) =>
             setUpdatedData({ ...updatedData, imageUrl: e.target.files[0] })
           }
@@ -74,7 +74,7 @@ function Profile() {
 
       <Button
         onClick={update}
-        disabled={!isCustomAuth && true}
+        disabled={!isCustomAuth ? true : false}
         className={classes.button}
         variant="contained"
         type="button"

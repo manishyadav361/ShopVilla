@@ -15,6 +15,7 @@ function Products() {
       <Box className={classes.products}>
         {products?.map((product) => (
           <Product
+            number={products.indexOf(product)}
             key={product?._id}
             title={product?.title}
             price={product?.price}

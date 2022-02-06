@@ -36,6 +36,7 @@ export const createCart = async (req, res) => {
           productId: productId,
           quantity: 1,
           total: price,
+          price: price,
         });
       }
       cart = await cart.save();
@@ -48,6 +49,7 @@ export const createCart = async (req, res) => {
             productId: productId,
             total: price,
             quantity: 1,
+            price: price,
           },
         ],
       });

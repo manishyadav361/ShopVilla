@@ -4,6 +4,8 @@ import useStyles from "./styles";
 import HomeIcon from "@material-ui/icons/Home";
 import CategoryIcon from "@material-ui/icons/Category";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getAllProducts } from "../../actions/Products";
 
 function AdminNavBar() {
   const classes = useStyles();
@@ -17,6 +19,7 @@ function AdminNavBar() {
       alert("You have been logged out!! Please Login again.");
     }
   }, []);
+
   return (
     <Container className={classes.container}>
       <Box className={classes.top}>
@@ -37,11 +40,7 @@ function AdminNavBar() {
           Home
         </Button>
         <Button
-          onClick={() =>
-            navigate(
-              `/admin/products/${user?.result?._id || user?.result?.googleId}`
-            )
-          }
+          onClick={() => navigate(`/admin/products`)}
           className={
             location.pathname === `/admin/products/${id}`
               ? `${classes.btn} ${classes.active}`

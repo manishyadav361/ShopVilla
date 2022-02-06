@@ -81,8 +81,8 @@ function ProductDetail({ product, loading }) {
             <Typography className={classes.name} variant="h5" color="inherit">
               Material
             </Typography>
-            {product?.material.map((m) => {
-              if (m !== "") {
+            {product?.material?.map((m) => {
+              if (m) {
                 return <li key={product?.material.indexOf(m)}>{m}</li>;
               }
             })}
@@ -101,10 +101,26 @@ function ProductDetail({ product, loading }) {
           <TableHead>
             {table.map((box) => (
               <TableRow className={classes.tableRow} key={table.indexOf(box)}>
-                <TableCell align="center" className={classes.tableData}>
+                <TableCell
+                  style={{
+                    color: "whitesmoke",
+                    background: "rgba(255,255,255,0.02)",
+                    borderBottom: "0.5px solid rgba(255,255,255,0.1)",
+                  }}
+                  align="center"
+                  className={classes.tableData}
+                >
                   {box.head}
                 </TableCell>
-                <TableCell align="center" className={classes.tableData}>
+                <TableCell
+                  style={{
+                    color: "whitesmoke",
+                    background: "rgba(255,255,255,0.02)",
+                    borderBottom: "0.5px solid rgba(255,255,255,0.1)",
+                  }}
+                  align="center"
+                  className={classes.tableData}
+                >
                   {box.text}
                 </TableCell>
               </TableRow>

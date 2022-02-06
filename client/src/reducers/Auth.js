@@ -23,7 +23,11 @@ const reducer = (state = { auth: null, error: null }, action) => {
       };
 
     default:
-      return state;
+      return {
+        ...state,
+        loading: false,
+        // error: null,
+      };
   }
 };
 export default reducer;

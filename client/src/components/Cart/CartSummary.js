@@ -1,9 +1,10 @@
 import { Box, Button, Typography } from "@material-ui/core";
 import React from "react";
 import useStyles from "./CartStyles";
-
+import { useNavigate } from "react-router-dom";
 function CartSummary({ cartProducts }) {
   const classes = useStyles();
+  const navigate = useNavigate();
   const totalPrice = cartProducts?.reduce(
     (acc, curr) => (acc += curr?.total),
     0
@@ -23,7 +24,11 @@ function CartSummary({ cartProducts }) {
         <Typography variant="h6">₹ {totalPrice}</Typography>
       </Box>
       <Box className={classes.checkout}>
-        <Button size="large" className={classes.checkBtn}>
+        <Button
+          size="large"
+          className={classes.checkBtn}
+          onClick={() => navigate("/checkout")}
+        >
           Proceed to Checkout
         </Button>
       </Box>

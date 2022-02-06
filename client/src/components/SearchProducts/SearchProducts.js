@@ -13,9 +13,14 @@ function SearchProducts() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const classes = useStyles();
+
+  // Products state
   const { searchProducts, loading } = useSelector((state) => state?.Products);
+
+  //creating a search pattern string
   const query = searchParams?.get("searchString")?.split(" ")?.join("+");
 
+  // runs every time the page is refreshed and searches for a product
   useEffect(() => {
     if (searchParams.get("searchString")) {
       dispatch(getProductsBySearch(query));

@@ -29,19 +29,19 @@ function Header() {
   const state = useSelector((state) => state);
   const authState = state.Auth;
   const cartState = state.Cart;
+
+  // toggle the sidebar
   const [toggle, setToggle] = useState(false);
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
+  // user logout
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/auth");
   };
-  useEffect(() => {
-    if (user) {
-      dispatch({ type: "RESET_PRODUCT_STATE" });
-    }
-  }, []);
+
+  // get the cart from th db if no user logout
   useEffect(() => {
     if (user) {
       dispatch(getCart());
@@ -50,6 +50,7 @@ function Header() {
     }
   }, []);
 
+  // logs out the user when the token is expired runs every time the location changes
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [authState]);
@@ -64,6 +65,7 @@ function Header() {
     }
   }, [location]);
 
+  // get all products
   useEffect(() => {
     dispatch({ type: "START_LOADING" });
     dispatch(getAllProducts());

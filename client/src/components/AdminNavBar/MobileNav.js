@@ -51,7 +51,7 @@ function MobileNav() {
         <Box className={classes.link}>
           <IconButton
             onClick={() => {
-              navigate(`/admin/products/${id}`);
+              navigate(`/admin/products`);
               setOpenNav(!openNav);
             }}
           >

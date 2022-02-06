@@ -36,8 +36,8 @@ function Product() {
     category: "",
     material: "",
     keywords: "",
-    warranty: 0 || "",
-    shipping: 0 || "",
+    warranty: "",
+    shipping: "" || 0,
     inStock: false || "",
     freeShipping: false || "",
   };
@@ -45,28 +45,22 @@ function Product() {
   const [formData, setFormData] = useState(initialState);
 
   const form = new FormData();
-  // form.append("title", formData?.title);
-  // form.append("image", formData?.coverImage);
-  // form.append("price", formData?.price);
-  // form.append("offerPercentage", formData?.offerPercentage);
-  // form.append("brandName", formData?.brandName);
-  // form.append("description", form?.description);
-  // form.append("quantity", formData?.quantity);
-  // form.append("colors", formData?.colors);
 
   for (const [key, value] of Object.entries(formData)) {
     form.append(key, value);
   }
-  let index = product?.coverImage.lastIndexOf("/");
-  let imageToUpdate = product?.coverImage.slice(index + 1);
+  let index = product?.coverImage?.lastIndexOf("/");
+  let imageToUpdate = product?.coverImage?.slice(index + 1);
   form.append("imageToUpdate", imageToUpdate);
-
+  // console.log(formData?.shipping);
+  form.set("shipping", formData?.shipping);
   const uploadProduct = (e) => {
     e.preventDefault();
     dispatch(insertProduct(form, user?.result?._id || user?.result?.googleId));
   };
 
-  const update = () => {
+  const update = (e) => {
+    e.preventDefault();
     dispatch(updateProduct(form, params?.id));
   };
 
@@ -180,7 +174,7 @@ function Product() {
           />
           <TextField
             label="Shipping Fee"
-            type="number"
+            // type="number"
             onChange={(e) =>
               setFormData({ ...formData, shipping: e.target?.value })
             }

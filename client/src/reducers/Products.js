@@ -24,7 +24,6 @@ const reducer = (
         ...state,
         products: action.payload,
         product: null,
-        searchProducts: null,
         loading: false,
         error: "",
       };
@@ -77,7 +76,6 @@ const reducer = (
       return {
         ...state,
         product: null,
-        searchProducts: null,
         loading: false,
         error: null,
       };

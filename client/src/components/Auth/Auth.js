@@ -17,12 +17,14 @@ import { signUp, signIn } from "../../actions/Auth";
 import Loader from "../Loader";
 function Auth() {
   const [toggle, setToggle] = useState(false);
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const classes = useStyles();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.Auth);
@@ -30,9 +32,9 @@ function Auth() {
 
   useEffect(() => {
     if (state.error) {
-      console.log(state?.error);
+      console.log(state.error);
     }
-  }, [state]);
+  }, [state.error]);
 
   const register = () => {
     dispatch(signUp(formData, history));
@@ -55,8 +57,12 @@ function Auth() {
   return (
     <>
       <Container className={classes.container}>
-        {state?.auth?.loading && <Loader />}
+        {state?.loading && <Loader />}
+
         <Box className={classes.logo}></Box>
+        {toggle && state?.error && (
+          <Typography color="secondary"> {state?.error}</Typography>
+        )}
         {toggle && (
           <TextField
             className={classes.textField}
@@ -69,14 +75,20 @@ function Auth() {
             }
           />
         )}
+        {!toggle && state?.error && (
+          <Typography color="secondary"> {state?.error}</Typography>
+        )}
         <TextField
           className={classes.textField}
           variant="outlined"
           required
           label="Email"
           size="small"
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={(e) => {
+            setFormData({ ...formData, email: e.target.value });
+          }}
         />
+
         <TextField
           className={classes.textField}
           variant="outlined"
@@ -84,10 +96,11 @@ function Auth() {
           label="Password"
           type="password"
           size="small"
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
+          onChange={(e) => {
+            setFormData({ ...formData, password: e.target.value });
+          }}
         />
+
         {toggle && (
           <TextField
             className={classes.textField}

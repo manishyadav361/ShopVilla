@@ -11,9 +11,13 @@ function RelatedProducts() {
     (state) => state.Products
   );
 
+  // creating a search pattern string
   const relatedSearch = product?.keywords.join(" ") + " " + product?.brandName;
+
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  // searches for related products
   useEffect(() => {
     dispatch(getProductsBySearch(relatedSearch));
   }, [dispatch, relatedSearch]);
