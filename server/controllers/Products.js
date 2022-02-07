@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 import { unlink } from "../index.js";
 
 export const getProducts = async (req, res) => {
-  if (!req.userId) {
-    return res.status(400).send("Access Denied !!");
-  }
+  // if (!req.userId) {
+  //   return res.status(400).send("Access Denied !!");
+  // }
   try {
     const products = await ProductsModel.find({});
     res.status(200).json({ products: products });

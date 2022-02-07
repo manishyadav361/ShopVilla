@@ -63,6 +63,7 @@ function Product({ coverImage, title, id, inStock, price }) {
       <Box className={classes.actions}>
         <IconButton
           size="small"
+          className={classes.edit}
           onClick={() => navigate(`/admin/product/${id}`)}
         >
           <EditOutlinedIcon className={classes.edit} />

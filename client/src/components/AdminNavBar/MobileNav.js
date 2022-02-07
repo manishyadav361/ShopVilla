@@ -39,6 +39,7 @@ function MobileNav() {
       >
         <Box className={classes.link}>
           <IconButton
+            color="inherit"
             onClick={() => {
               navigate("/admin");
               setOpenNav(!openNav);
@@ -50,6 +51,7 @@ function MobileNav() {
         </Box>
         <Box className={classes.link}>
           <IconButton
+            color="inherit"
             onClick={() => {
               navigate(`/admin/products`);
               setOpenNav(!openNav);
@@ -61,6 +63,7 @@ function MobileNav() {
         </Box>
         <Box className={classes.link}>
           <IconButton
+            color="inherit"
             onClick={() => {
               navigate("/");
               setOpenNav(!openNav);

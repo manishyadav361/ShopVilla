@@ -4,13 +4,17 @@ import useStyles from "./CartStyles";
 import { useSelector } from "react-redux";
 import CartItems from "./CartItems";
 import CartSummary from "./CartSummary";
-
 function Cart() {
   const classes = useStyles();
 
   const state = useSelector((state) => state);
   const cartProducts = state?.Cart?.cart?.products;
   const { loading } = useSelector((state) => state?.Products);
+
+  const length = cartProducts?.length;
+  if (!length) {
+    return <></>;
+  }
 
   return (
     <Container className={classes.container}>

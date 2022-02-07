@@ -7,6 +7,9 @@ export default makeStyles((theme) => ({
     margin: "0",
     background: "#2f2d2d",
   },
+  index: {
+    position: "absolute",
+  },
   product: {
     display: "flex",
     flexDirection: "column",

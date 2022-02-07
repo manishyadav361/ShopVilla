@@ -6,6 +6,7 @@ import useStyles from "./styles";
 const Checkout = ({ user }) => {
   const [transform, setTransform] = useState(false);
   const classes = useStyles();
+
   return (
     <div
       className={

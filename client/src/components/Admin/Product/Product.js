@@ -9,7 +9,6 @@ import {
 import React, { useEffect, useState } from "react";
 import useStyles from "./ProductStyle";
 import { useDispatch, useSelector } from "react-redux";
-import FileBase from "react-file-base64";
 import { insertProduct, updateProduct } from "../../../actions/Products";
 import { useParams } from "react-router-dom";
 import MobileNav from "../../AdminNavBar/MobileNav";
@@ -52,7 +51,6 @@ function Product() {
   let index = product?.coverImage?.lastIndexOf("/");
   let imageToUpdate = product?.coverImage?.slice(index + 1);
   form.append("imageToUpdate", imageToUpdate);
-  // console.log(formData?.shipping);
   form.set("shipping", formData?.shipping);
   const uploadProduct = (e) => {
     e.preventDefault();

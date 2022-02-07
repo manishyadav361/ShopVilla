@@ -39,6 +39,9 @@ app.use(
   "/public/uploads",
   express.static(path.resolve("../client") + "/public/uploads")
 );
+app.get("/", (req, res) => {
+  res.send("welcome to shopvilla's api.");
+});
 app.use("/auth", authRoutes);
 app.use("/products", productsRoutes);
 app.use("/cart", cartRoutes);

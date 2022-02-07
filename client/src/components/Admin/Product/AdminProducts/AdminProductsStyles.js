@@ -1,11 +1,10 @@
 import { makeStyles } from "@material-ui/core";
-import svg from "../../../../images/Group 219.png";
 export default makeStyles((theme) => ({
   productsContainer: {
     [theme.breakpoints.up("sm")]: {
       display: "flex",
     },
-    background: "white",
+    background: "#2f2d2d",
   },
   right: {
     width: "100%",
@@ -17,15 +16,13 @@ export default makeStyles((theme) => ({
   product: {
     display: "flex",
     alignItems: "center",
-    borderBottom: "1px solid whitesmoke",
+    borderBottom: "0.2px solid rgba(255,255,255,0.08)",
     padding: "5px",
     width: "96%",
     margin: "0 auto",
     cursor: "pointer",
     "&:hover": {
-      // background: "rgba(220,220,220,0.05)",
-      background: "rgb(231, 251, 190,0.7)",
-      boxShadow: "0px 2px 10px rgba(0,0,0,0.05)",
+      background: "rgba(255,255,255,0.1)",
     },
     [theme.breakpoints.only("md")]: {
       width: "95%",
@@ -39,12 +36,14 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       flex: "1",
     },
+    color: "whitesmoke",
   },
 
   title: {
     width: "45%",
     overflow: "hidden",
     whiteSpace: "nowrap",
+    color: "whitesmoke",
     [theme.breakpoints.up("sm")]: {
       padding: "0px 4px",
       width: "50%",
@@ -57,11 +56,13 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: "20%",
     },
+    color: "whitesmoke",
   },
   actions: {
     flex: "1",
     display: "flex",
     justifyContent: "center",
+    color: "whitesmoke",
   },
   select: {
     [theme.breakpoints.up("sm")]: {
@@ -70,17 +71,17 @@ export default makeStyles((theme) => ({
       justifyContent: "center",
     },
   },
+  edit: {
+    color: "whitesmoke",
+  },
   delete: {
-    color: "#E10000",
+    color: "rgba(255,0,0,0.7)",
   },
   head: {
     padding: "10px 5px",
     borderRadius: "0px",
     zIndex: "10",
-    background: "whitesmoke",
-    "&:hover": {
-      background: "whitesmoke",
-    },
+    background: "rgba(255,255,255,0.1)",
   },
   titleField: {
     width: "100%",

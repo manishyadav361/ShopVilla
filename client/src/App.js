@@ -1,6 +1,6 @@
 import Auth from "./components/Auth/Auth";
 import useStyles from "./styles";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Products from "./components/Products/Products";
@@ -21,13 +21,13 @@ function App() {
   return (
     <BrowserRouter>
       <div className={classes.app}>
-        {/* <Alan user={user} /> */}
+        <Alan user={user} />
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Header /> <Alan />
+                <Header />
               </>
             }
           />

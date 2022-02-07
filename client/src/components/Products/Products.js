@@ -13,10 +13,11 @@ function Products() {
     <Container className={classes.container}>
       {loading && <Loader />}
       <Box className={classes.products}>
-        {products?.map((product) => (
+        {products?.map((product, i) => (
           <Product
             number={products.indexOf(product)}
             key={product?._id}
+            i={i}
             title={product?.title}
             price={product?.price}
             rating={product?.rating}

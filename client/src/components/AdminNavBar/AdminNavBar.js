@@ -3,9 +3,8 @@ import { Box, Button, Container, Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import HomeIcon from "@material-ui/icons/Home";
 import CategoryIcon from "@material-ui/icons/Category";
+import StorefrontIcon from "@material-ui/icons/Storefront";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getAllProducts } from "../../actions/Products";
 
 function AdminNavBar() {
   const classes = useStyles();
@@ -18,7 +17,7 @@ function AdminNavBar() {
       navigate("/auth");
       alert("You have been logged out!! Please Login again.");
     }
-  }, []);
+  }, [user, id]);
 
   return (
     <Container className={classes.container}>
@@ -42,7 +41,7 @@ function AdminNavBar() {
         <Button
           onClick={() => navigate(`/admin/products`)}
           className={
-            location.pathname === `/admin/products/${id}`
+            location.pathname === `/admin/products`
               ? `${classes.btn} ${classes.active}`
               : `${classes.btn}`
           }
@@ -55,7 +54,7 @@ function AdminNavBar() {
           className={
             location.pathname === "/" ? `${classes.btn} ` : `${classes.btn}`
           }
-          startIcon={<HomeIcon />}
+          startIcon={<StorefrontIcon />}
         >
           Back To Store
         </Button>

@@ -5,8 +5,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       maxWidth: "220px",
       height: "100vh",
-      background: "white",
-      boxShadow: "2px 0px 8px rgba(0,0,0,0.15)",
+      background: "#2f2d2d",
+      boxShadow: "5px 0px 20px rgba(0,0,0,0.5)",
       margin: "0",
       padding: "0",
 
@@ -14,6 +14,7 @@ export default makeStyles((theme) => ({
       borderBottomRightRadius: "8px",
 
       display: "block",
+      color: "white",
     },
 
     display: "none",
@@ -22,25 +23,29 @@ export default makeStyles((theme) => ({
     width: "50px",
     height: "50px",
     borderRadius: "50%",
+    objectFit: "contain",
+    border: "2px solid whitesmoke",
   },
   btn: {
     display: "flex",
     justifyContent: "flex-start",
     padding: "10px 30px",
     borderRadius: "0%",
+    color: "whitesmoke",
     "&:hover": {
-      background: "rgb(88, 0, 255)",
+      background: "rgba(88, 0, 255,0.2)",
       color: "white",
     },
   },
   active: {
-    background: "rgb(88, 0, 255)",
+    background: "rgba(88, 0, 255,0.2)",
     color: "white",
   },
   top: {
     borderTopRightRadius: "8px",
     width: "100%",
-    background: "#E7FBBE",
+    background: "rgba(88, 0, 255,0.1)",
+
     height: "150px",
     display: "flex",
     flexDirection: "column",
@@ -65,7 +70,6 @@ export default makeStyles((theme) => ({
     },
   },
   mobileNav: {
-    // transform: "translateY(100%)",
     height: "100vh",
     display: "none",
   },
@@ -73,13 +77,14 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    color: "white",
   },
   openNav: {
     position: "fixed",
     bottom: "10%",
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
+    left: "50%",
+    transform: `translateX(-50%)`,
+
     zIndex: "110",
     [theme.breakpoints.up("sm")]: {
       display: "none",

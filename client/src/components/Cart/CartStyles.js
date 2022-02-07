@@ -12,6 +12,12 @@ export default makeStyles((theme) => ({
       alignItems: "flex-start",
     },
   },
+  bg: {
+    width: "100%",
+    height: "100vh",
+    backgroundPosition: "center",
+    zIndex: "100",
+  },
   productError: {
     height: "120px",
     display: "flex",

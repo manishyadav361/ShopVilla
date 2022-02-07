@@ -9,7 +9,6 @@ function CartSummary({ cartProducts }) {
     (acc, curr) => (acc += curr?.total),
     0
   );
-
   return (
     <Box className={classes.cartSummary}>
       <Typography variant="h5" className={classes.head}>
