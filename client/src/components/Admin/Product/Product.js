@@ -9,19 +9,24 @@ import {
 import React, { useEffect, useState } from "react";
 import useStyles from "./ProductStyle";
 import { useDispatch, useSelector } from "react-redux";
-import { insertProduct, updateProduct } from "../../../actions/Products";
-import { useParams } from "react-router-dom";
+import {
+  getProduct,
+  insertProduct,
+  updateProduct,
+} from "../../../actions/Products";
+import { useLocation, useParams } from "react-router-dom";
 import MobileNav from "../../AdminNavBar/MobileNav";
 import AdminNavBar from "../../AdminNavBar/AdminNavBar";
 function Product() {
   const classes = useStyles();
   const params = useParams();
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.Products);
   const user = JSON.parse(localStorage.getItem("profile"));
-  const product = state?.Products?.products?.filter(
-    (product) => product?._id === params?.id
-  )?.[0];
+  // const product = state?.Products?.products?.filter(
+  //   (product) => product?._id === params?.id
+  // )?.[0];
+  const product = state?.product;
 
   const initialState = {
     title: "",
@@ -30,7 +35,7 @@ function Product() {
     offerPercentage: 0,
     brandName: "",
     description: "",
-    quantity: "",
+    quantity: 0,
     colors: "",
     category: "",
     material: "",
@@ -40,6 +45,7 @@ function Product() {
     inStock: false || "",
     freeShipping: false || "",
   };
+  const location = useLocation();
 
   const [formData, setFormData] = useState(initialState);
 
@@ -68,7 +74,13 @@ function Product() {
     } else {
       setFormData(initialState);
     }
-  }, [product]);
+  }, [product, location]);
+
+  useEffect(() => {
+    if (params.id) {
+      dispatch(getProduct(params?.id));
+    }
+  }, [params]);
 
   return (
     <Container className={classes.container}>

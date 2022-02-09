@@ -10,6 +10,7 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "auto",
+    background: "whitesmoke",
   },
   loader: {
     width: "100%",

@@ -28,9 +28,7 @@ export const getProductsBySearch = (searchString) =>
 export const insertProduct = (data, id) => API.post(`/products/${id}`, data);
 
 export const deleteProduct = (id, imageToUpdate) => {
-  API.delete(`/products/${id}`, {
-    data: { imageToUpdate },
-  });
+  API.delete(`/products/${id}`);
 };
 
 export const updateProduct = (formData, id) =>

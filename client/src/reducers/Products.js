@@ -51,8 +51,9 @@ const reducer = (
       };
     case "DELETE_PRODUCT":
       const updatedProducts = state.products?.filter(
-        (product) => product?._id !== action?.payload._id
+        (product) => product?._id !== action?.payload
       );
+      console.log(updatedProducts);
       return {
         ...state,
         products: updatedProducts,
@@ -73,12 +74,7 @@ const reducer = (
         error: "",
       };
     default:
-      return {
-        ...state,
-        product: null,
-        loading: false,
-        error: null,
-      };
+      return state;
   }
 };
 

@@ -49,7 +49,7 @@ export const insertProduct = async (req, res) => {
   const material = data?.material?.split(",");
   const colors = data?.colors?.split(",");
   try {
-    const file = req.file;
+    const file = req?.file;
     const fileName = file?.filename;
     const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
     if (!file) {
@@ -60,27 +60,31 @@ export const insertProduct = async (req, res) => {
       keywords,
       material,
       colors,
+      inStock: data?.inStock || false,
+      freeShipping: data?.inStock || false,
+
       shipping: data?.shipping || 0,
       coverImage: file && `${basePath}${fileName}`,
       createdBy: userId,
+      quantity: data?.quantity || 0,
     });
     res.status(200).json({ product: product });
   } catch (error) {
+    console.log(error);
     res.status(500).send("something went wrong!!");
   }
 };
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
-  const { imageToUpdate } = req?.body;
   try {
     if (!mongoose.Types.ObjectId.isValid(id))
-      return res.status(404).send("Cannot find product with id ", productId);
+      return res.status(404).send("Cannot find product with id ", id);
 
     const product = await ProductsModel.findByIdAndDelete(id);
-    unlink(imageToUpdate);
     res.status(200).json({ product: product });
   } catch (error) {
+    console.log(error);
     res.status(500).send("something went wrong!!");
   }
 };
@@ -111,6 +115,7 @@ export const updateProduct = async (req, res) => {
         material,
         colors,
         _id: id,
+        quantity: 0 || formData?.quantity,
       },
       {
         new: true,

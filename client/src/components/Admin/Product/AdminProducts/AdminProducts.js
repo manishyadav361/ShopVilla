@@ -1,6 +1,6 @@
 import { Box, Button } from "@material-ui/core";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AdminNavBar from "../../../AdminNavBar/AdminNavBar";
 import MobileNav from "../../../AdminNavBar/MobileNav";
 import useStyles from "./AdminProductsStyles";
@@ -8,15 +8,19 @@ import Product from "./Product";
 import TableHead from "./TableHead";
 import AddIcon from "@material-ui/icons/Add";
 import { useNavigate } from "react-router-dom";
+import { getAllProducts } from "../../../../actions/Products";
 function AdminProducts({ user }) {
   const classes = useStyles();
   const navigate = useNavigate();
   const id = user?.result?._id || user?.result?.googleId;
-  const state = useSelector((state) => state);
-  const adminProducts = state?.Products?.products?.filter(
-    (product) => product?.createdBy === id
-  );
+  const state = useSelector((state) => state.Products?.products);
+  const adminProducts = state?.filter((product) => product?.createdBy === id);
   const [selectAll, setSelectAll] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
   return (
     <div className={classes.productsContainer}>

@@ -5,7 +5,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import CategoryIcon from "@material-ui/icons/Category";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { getAllProducts } from "../../actions/Products";
 function AdminNavBar() {
   const classes = useStyles();
   const location = useLocation();

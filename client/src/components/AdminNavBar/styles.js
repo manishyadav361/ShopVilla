@@ -77,7 +77,8 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    color: "white",
+    // color: "white",
+    color: "lightblue",
   },
   openNav: {
     position: "fixed",
@@ -93,7 +94,7 @@ export default makeStyles((theme) => ({
   toggleNav: {
     position: "fixed",
     height: "100vh",
-    transition: "all 2s ease-in",
+    // transition: "all 2s ease-in",
     display: "grid",
     gridTemplateColumns: "100px 100px 100px",
     justifyContent: "center",
@@ -102,7 +103,9 @@ export default makeStyles((theme) => ({
     // position: "absolute",
     top: "0%",
     boxShadow: "0px 0px 45px rgba(0, 0, 0, 0.25)",
-    background: "rgba(255, 255, 255, 0.03)",
+    // background: "rgba(255, 255, 255, 0.03)",
+    background: "rgba(0,0,0,0.03)",
+
     zIndex: "101",
     borderTopRightRadius: "8px",
     backdropFilter: "blur(3px)",

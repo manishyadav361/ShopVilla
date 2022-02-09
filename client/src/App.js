@@ -13,15 +13,19 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Checkout from "./components/Checkout/Checkout";
 import Success from "./components/Checkout/Success";
 import Alan from "./components/Alan/Alan";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAllProducts } from "./actions/Products";
 
 function App() {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
+  const [transform, setTransform] = useState(false);
 
   return (
     <BrowserRouter>
       <div className={classes.app}>
-        <Alan user={user} />
+        <Alan />
         <Routes>
           <Route
             path="/"
@@ -62,12 +66,15 @@ function App() {
             }
           />
 
-          <Route exact path="/admin/product" element={<Product />} />
-          <Route exact path="/admin/product/:id" element={<Product />} />
+          <Route path="/admin/product" element={<Product />} />
+          <Route path="/admin/product/:id" element={<Product />} />
           <Route
-            exact
             path={`/admin/products`}
-            element={<AdminProducts user={user} />}
+            element={
+              <>
+                <AdminProducts user={user} />
+              </>
+            }
           />
           <Route path="/admin" element={<Admin user={user} />} />
           <Route
@@ -89,7 +96,16 @@ function App() {
               </>
             }
           />
-          <Route path="/checkout" element={<Checkout user={user} />} />
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                transform={transform}
+                setTransform={setTransform}
+                user={user}
+              />
+            }
+          />
           <Route path="/payment/success" element={<Success />} />
         </Routes>
       </div>
