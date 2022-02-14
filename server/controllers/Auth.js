@@ -52,23 +52,25 @@ export const signUp = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const { username, imageToDelete } = req.body;
+  const {
+    updatedData: { username, profileImg },
+  } = req.body;
   const { id } = req.params;
   try {
-    const file = req?.file;
-    const fileName = file?.filename;
-    const basePath = `${req?.protocol}://${req?.get("host")}/public/uploads/`;
+    // const file = req?.file;
+    // const fileName = file?.filename;
+    // const basePath = `${req?.protocol}://${req?.get("host")}/public/uploads/`;
 
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send("cannot find user ");
     const result = await UserModel.findByIdAndUpdate(
       id,
-      { username, imageUrl: file && `${basePath}${fileName}`, _id: id },
+      { username, imageUrl: profileImg && profileImg, _id: id },
       { new: true }
     );
-    if (file) {
-      unlink(imageToDelete);
-    }
+    // if (file) {
+    //   unlink(imageToDelete);
+    // }
     const token = jwt.sign({ email: result?.email, id: result?._id }, secret, {
       expiresIn: "1h",
     });

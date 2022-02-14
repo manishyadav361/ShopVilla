@@ -1,14 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import alanBtn from "@alan-ai/alan-sdk-web";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import wordsToNumbers from "words-to-numbers";
-import { getAllProducts } from "../../actions/Products";
 
-const Alan = ({ setTransform }) => {
+const Alan = () => {
   const navigate = useNavigate();
-
-  const products = useSelector((state) => state.Products?.products);
 
   useEffect(() => {
     alanBtn({
@@ -48,7 +44,6 @@ const Alan = ({ setTransform }) => {
         } else if (command === "checkout") {
           navigate("/checkout");
         } else if (command === "proceed with payment") {
-          setTransform(true);
         }
       },
     });

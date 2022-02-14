@@ -74,7 +74,7 @@ const Address = ({ setTransform }) => {
           size="small"
           name="aptNumber"
           label="Flat/Apt No."
-          variant="filled"
+          variant="standard"
           value={form?.aptNumber || ""}
         />
         <TextField
@@ -82,7 +82,7 @@ const Address = ({ setTransform }) => {
           size="small"
           name="aptName"
           label="Apt/Bldg Name"
-          variant="filled"
+          variant="standard"
           value={form?.aptName || ""}
         />
 
@@ -91,7 +91,7 @@ const Address = ({ setTransform }) => {
           size="small"
           name="landmark"
           label="Landmark"
-          variant="filled"
+          variant="standard"
           value={form?.landmark || ""}
         />
 
@@ -100,7 +100,7 @@ const Address = ({ setTransform }) => {
           size="small"
           name="district"
           label="District"
-          variant="filled"
+          variant="standard"
           value={form?.district || ""}
         />
         <TextField
@@ -108,7 +108,7 @@ const Address = ({ setTransform }) => {
           size="small"
           name="city"
           label="City"
-          variant="filled"
+          variant="standard"
           value={form?.city || ""}
         />
         <TextField
@@ -116,7 +116,7 @@ const Address = ({ setTransform }) => {
           size="small"
           name="state"
           label="State"
-          variant="filled"
+          variant="standard"
           value={form?.state || ""}
         />
         <TextField
@@ -124,7 +124,7 @@ const Address = ({ setTransform }) => {
           size="small"
           name="country"
           label="Country"
-          variant="filled"
+          variant="standard"
           value={form?.country || ""}
         />
         <TextField
@@ -132,23 +132,27 @@ const Address = ({ setTransform }) => {
           size="small"
           name="pincode"
           label="pincode"
-          variant="filled"
+          variant="standard"
           value={form?.pincode || ""}
         />
       </Box>
       {updateAdd && (
-        <Button variant="contained" onClick={update}>
+        <Button color="primary" variant="contained" onClick={update}>
           update
         </Button>
       )}
       {!updateAdd && address && (
-        <Button variant="contained" onClick={() => setTransform(true)}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => setTransform(true)}
+        >
           Continue
         </Button>
       )}
 
       {!updateAdd && !address && (
-        <Button variant="contained" onClick={add}>
+        <Button color="primary" variant="contained" onClick={add}>
           Add
         </Button>
       )}

@@ -22,20 +22,25 @@ function CartItems({ id, total, quantity, loading }) {
   const dispatch = useDispatch();
 
   const { products } = useSelector((state) => state?.Products);
+
   const cartItem = products?.filter((product) => product?._id === id)?.[0];
 
   const incrementQuantity = () => {
     dispatch(createCart(id, cartItem?.price));
   };
+
   const decrementQuantity = () => {
     dispatch(removeProduct(id, cartItem?.price));
   };
+
   const removeItem = () => {
     dispatch(removeCartItem(id));
   };
+
   const toggleLike = () => {
     setLike(!like);
   };
+
   const routeProduct = () => {
     dispatch(getProduct(id));
     navigate(`/products/${id}`);
@@ -46,19 +51,22 @@ function CartItems({ id, total, quantity, loading }) {
       <Box className={classes.cartItem}>
         {!cartItem ? (
           <>
-            <Box className={classes.productError}>
-              <Typography>Product is no longer available</Typography>
-              <IconButton
-                variant="contained"
-                color="secondary"
-                onClick={removeItem}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Box>
+            {loading ? (
+              <CartSkeleton />
+            ) : (
+              <Box className={classes.productError}>
+                <Typography>Product is no longer available</Typography>
+                <IconButton
+                  variant="contained"
+                  color="secondary"
+                  onClick={removeItem}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
+            )}
           </>
         ) : (
-          // <CartSkeleton />
           <>
             {loading && <CartSkeleton />}
             <Box

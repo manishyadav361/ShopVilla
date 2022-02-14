@@ -121,4 +121,11 @@ export default makeStyles((theme) => ({
     color: "black",
     boxShadow: "4px 4px 8px rgba(0,0,0,0.3)",
   },
+  email: {
+    width: "90%",
+    overflowX: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+  },
 }));

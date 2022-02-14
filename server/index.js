@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
@@ -9,10 +10,10 @@ import productsRoutes from "./Routes/Products.js";
 import cartRoutes from "./Routes/Carts.js";
 import paymentRoutes from "./Payments.js";
 import addressRoutes from "./Routes/Address.js";
-import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 

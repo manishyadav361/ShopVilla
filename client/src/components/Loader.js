@@ -1,6 +1,8 @@
 import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
+import { Oval } from "react-loader-spinner";
 import Spinner from "../images/Spinner-1s-200px (2).gif";
+
 const useStyles = makeStyles((theme) => ({
   box: {
     width: "100%",
@@ -8,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: "100",
+    zIndex: "200",
     height: "100vh",
     background: "rgba(0,0,0,0.3)",
     overflow: "hidden",
@@ -20,7 +22,13 @@ function Loader() {
 
   return (
     <Box className={classes.box}>
-      <img width="120" src={Spinner} alt="" />
+      <Oval
+        heigth="50"
+        width="50"
+        color="whitesmoke"
+        ariaLabel="loading"
+        background="black"
+      />
     </Box>
   );
 }

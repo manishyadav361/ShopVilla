@@ -9,12 +9,15 @@ import TableHead from "./TableHead";
 import AddIcon from "@material-ui/icons/Add";
 import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../../../../actions/Products";
+import Loader from "../../../Loader";
 function AdminProducts({ user }) {
   const classes = useStyles();
   const navigate = useNavigate();
   const id = user?.result?._id || user?.result?.googleId;
-  const state = useSelector((state) => state.Products?.products);
-  const adminProducts = state?.filter((product) => product?.createdBy === id);
+  const state = useSelector((state) => state.Products);
+  const adminProducts = state?.products?.filter(
+    (product) => product?.createdBy === id
+  );
   const [selectAll, setSelectAll] = useState(false);
   const dispatch = useDispatch();
 
@@ -25,6 +28,7 @@ function AdminProducts({ user }) {
   return (
     <div className={classes.productsContainer}>
       <AdminNavBar />
+      {state?.loading && <Loader />}
       <MobileNav />
       <Box className={classes.right}>
         <Button

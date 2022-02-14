@@ -25,7 +25,7 @@ function AdminNavBar() {
       <Box className={classes.top}>
         <img className={classes.profile} src={user?.result?.imageUrl} alt="" />
         <Typography>{user?.result?.name || user?.result?.username}</Typography>
-        <Typography>{user?.result?.email}</Typography>
+        <Typography className={classes.email}>{user?.result?.email}</Typography>
       </Box>
       <Box className={classes.bottom}>
         <Button

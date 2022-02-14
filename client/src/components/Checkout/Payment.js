@@ -33,7 +33,7 @@ const Payment = ({ billingDetails }) => {
 
     try {
       const { data: client_secret } = await axios.post(
-        "http://localhost:5000/payment",
+        "https://shopvilla-voice-recognition.herokuapp.com/payment",
         {
           amount: grandTotal * 100,
         }
@@ -72,7 +72,7 @@ const Payment = ({ billingDetails }) => {
   const cardElementOptions = {
     style: {
       base: {
-        fontSize: "18px",
+        fontSize: "16px",
       },
       invalid: {
         color: "red",
@@ -80,7 +80,6 @@ const Payment = ({ billingDetails }) => {
     },
     hidePostalCode: true,
   };
-  console.log(checkoutError);
 
   return (
     <form
@@ -94,7 +93,13 @@ const Payment = ({ billingDetails }) => {
           onChange={handleCardDetailsChange}
         />
       </Box>
-      <Button onClick={pay} disabled={processing ? true : false}>
+      <Button
+        onClick={pay}
+        // variant="contained"
+        color="primary"
+        disabled={processing ? true : false}
+        className={classes.payBtn}
+      >
         {processing ? "Processing..." : "Pay"}
       </Button>
       {checkoutError && (

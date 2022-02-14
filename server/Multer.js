@@ -37,8 +37,8 @@ const upload = multer({
 });
 
 // local file path
-const directory = path.resolve("../client") + "/public/uploads";
-
+// const directory = path.resolve("../client") + "/public/uploads";
+const directory = "/uploads";
 // multer storage handler for local
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -48,6 +48,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       uploadError = null;
     }
+    console.log(uploadError);
     cb(uploadError, directory);
   },
   filename: function (req, file, cb) {

@@ -43,28 +43,27 @@ export const getProductsBySearch = async (req, res) => {
 };
 
 export const insertProduct = async (req, res) => {
-  const data = req.body;
+  const { data } = req.body;
   const { userId } = req;
-  const keywords = data?.keywords?.split(",");
-  const material = data?.material?.split(",");
-  const colors = data?.colors?.split(",");
+  // const keywords = data?.keywords?.split(",");
+  // const material = data?.material?.split(",");
+  // const colors = data?.colors?.split(",");
   try {
-    const file = req?.file;
-    const fileName = file?.filename;
-    const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
-    if (!file) {
-      console.log("file not present");
-    }
+    // const file = req?.file;
+    // const fileName = file?.filename;
+    // const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+    // if (!file) {
+    //   console.log("file not present");
+    // }
     const product = await ProductsModel.create({
       ...data,
-      keywords,
-      material,
-      colors,
+
       inStock: data?.inStock || false,
       freeShipping: data?.inStock || false,
 
       shipping: data?.shipping || 0,
-      coverImage: file && `${basePath}${fileName}`,
+      coverImage: data?.imageUrl,
+
       createdBy: userId,
       quantity: data?.quantity || 0,
     });
@@ -90,16 +89,16 @@ export const deleteProduct = async (req, res) => {
 };
 
 export const updateProduct = async (req, res) => {
-  const formData = req.body;
+  const { formData } = req.body;
   const { id } = req.params;
-  const keywords = formData?.keywords?.split(",");
-  const material = formData?.material?.split(",");
-  const colors = formData?.colors?.split(",");
+  // const keywords =form formData?.keywords?.split(",");
+  // const material = formData?.material?.split(",");
+  // const colors = formData?.colors?.split(",");
 
   try {
-    const file = req.file;
-    const fileName = file?.filename;
-    const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+    // const file = req.file;
+    // const fileName = file?.filename;
+    // const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
 
     if (!req.userId) {
       res.status(400).send("Access Denied !!");
@@ -110,10 +109,10 @@ export const updateProduct = async (req, res) => {
       id,
       {
         ...formData,
-        coverImage: file && `${basePath}${fileName}`,
-        keywords,
-        material,
-        colors,
+        coverImage: formData?.imageUrl,
+        // keywords,
+        // material,
+        // colors,
         _id: id,
         quantity: 0 || formData?.quantity,
       },
@@ -121,9 +120,9 @@ export const updateProduct = async (req, res) => {
         new: true,
       }
     );
-    if (file) {
-      unlink(req.body?.imageToUpdate);
-    }
+    // if (file) {
+    //   unlink(req.body?.imageToUpdate);
+    // }
     res.status(200).json({ product: product });
   } catch (error) {
     console.log(error);

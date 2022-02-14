@@ -18,6 +18,6 @@ router.get("/product/:id", auth, getProduct);
 router.get("/search", auth, getProductsBySearch);
 router.post("/:id", uploadOptions.single("coverImage"), auth, insertProduct);
 router.delete("/:id", auth, deleteProduct);
-router.patch("/:id", uploadOptions.single("coverImage"), auth, updateProduct);
+router.patch("/:id", auth, updateProduct);
 
 export default router;

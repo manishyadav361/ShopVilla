@@ -1,25 +1,35 @@
-const reducer = (
-  state = {
-    products: null,
-    searchProducts: null,
-    product: null,
-    loading: false,
-    error: null,
-  },
-  action
-) => {
+import {
+  DELETE_PRODUCT,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT,
+  INSERT_PRODUCT,
+  PRODUCTS_BY_SEARCH,
+  START_LOADING,
+  STOP_LOADING,
+  UPDATE_PRODUCT,
+} from "../actionTypes/actionTypes";
+
+const initialState = {
+  products: null,
+  searchProducts: null,
+  product: null,
+  loading: false,
+  error: null,
+};
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "START_LOADING":
+    case START_LOADING:
       return {
         ...state,
         loading: true,
       };
-    case "STOP_LOADING":
+    case STOP_LOADING:
       return {
         ...state,
         loading: false,
       };
-    case "GET_ALL_PRODUCTS":
+    case GET_ALL_PRODUCTS:
       return {
         ...state,
         products: action.payload,
@@ -27,21 +37,21 @@ const reducer = (
         loading: false,
         error: "",
       };
-    case "PRODUCTS_BY_SEARCH":
+    case PRODUCTS_BY_SEARCH:
       return {
         ...state,
         searchProducts: action.payload,
         loading: false,
         error: null,
       };
-    case "GET_PRODUCT":
+    case GET_PRODUCT:
       return {
         ...state,
         product: action.payload,
         loading: false,
         error: "",
       };
-    case "INSERT_PRODUCT":
+    case INSERT_PRODUCT:
       state?.products?.push(action?.payload);
 
       return {
@@ -49,7 +59,7 @@ const reducer = (
         loading: false,
         error: "",
       };
-    case "DELETE_PRODUCT":
+    case DELETE_PRODUCT:
       const updatedProducts = state.products?.filter(
         (product) => product?._id !== action?.payload
       );
@@ -60,7 +70,7 @@ const reducer = (
         loading: false,
         error: "",
       };
-    case "UPDATE_PRODUCT":
+    case UPDATE_PRODUCT:
       const updated = state?.products?.map((product) => {
         if (product?._id === action?.payload?._id) {
           return action.payload;

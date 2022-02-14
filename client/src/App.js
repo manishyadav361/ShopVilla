@@ -16,6 +16,7 @@ import Alan from "./components/Alan/Alan";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllProducts } from "./actions/Products";
+import { Audio, Oval } from "react-loader-spinner";
 
 function App() {
   const classes = useStyles();
@@ -27,14 +28,7 @@ function App() {
       <div className={classes.app}>
         <Alan />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Header />
-              </>
-            }
-          />
+          <Route path="/" element={<Header />} />
           <Route path="/auth" element={<Auth />} />
           <Route
             exact

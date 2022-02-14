@@ -10,9 +10,9 @@ function Admin({ user }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllProducts());
+  // }, [dispatch]);
   return (
     <Box className={classes.admin}>
       <AdminNavBar />

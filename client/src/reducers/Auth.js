@@ -1,12 +1,14 @@
+import { LOGOUT, SIGNIN, START_LOADING } from "../actionTypes/actionTypes";
+
 const reducer = (state = { auth: null, error: null }, action) => {
   switch (action.type) {
-    case "START_LOADING":
+    case START_LOADING:
       return {
         ...state,
         loading: true,
       };
 
-    case "SIGNIN":
+    case SIGNIN:
       localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
       return {
         ...state,
@@ -14,7 +16,7 @@ const reducer = (state = { auth: null, error: null }, action) => {
         error: action?.error,
         loading: false,
       };
-    case "LOGOUT":
+    case LOGOUT:
       localStorage.clear();
 
       return {
@@ -26,7 +28,6 @@ const reducer = (state = { auth: null, error: null }, action) => {
       return {
         ...state,
         loading: false,
-        // error: null,
       };
   }
 };

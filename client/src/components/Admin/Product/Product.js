@@ -17,6 +17,7 @@ import {
 import { useLocation, useParams } from "react-router-dom";
 import MobileNav from "../../AdminNavBar/MobileNav";
 import AdminNavBar from "../../AdminNavBar/AdminNavBar";
+import FileBase from "react-file-base64";
 function Product() {
   const classes = useStyles();
   const params = useParams();
@@ -44,28 +45,32 @@ function Product() {
     shipping: "" || 0,
     inStock: false || "",
     freeShipping: false || "",
+    imageUrl: "",
   };
   const location = useLocation();
 
   const [formData, setFormData] = useState(initialState);
 
-  const form = new FormData();
+  // const form = new FormData();
 
-  for (const [key, value] of Object.entries(formData)) {
-    form.append(key, value);
-  }
-  let index = product?.coverImage?.lastIndexOf("/");
-  let imageToUpdate = product?.coverImage?.slice(index + 1);
-  form.append("imageToUpdate", imageToUpdate);
-  form.set("shipping", formData?.shipping);
+  // for (const [key, value] of Object.entries(formData)) {
+  //   form.append(key, value);
+  // }
+  // let index = product?.coverImage?.lastIndexOf("/");
+  // let imageToUpdate = product?.coverImage?.slice(index + 1);
+  // form.append("imageToUpdate", imageToUpdate);
+  // form.set("shipping", formData?.shipping);
+
   const uploadProduct = (e) => {
     e.preventDefault();
-    dispatch(insertProduct(form, user?.result?._id || user?.result?.googleId));
+    dispatch(
+      insertProduct(formData, user?.result?._id || user?.result?.googleId)
+    );
   };
 
   const update = (e) => {
     e.preventDefault();
-    dispatch(updateProduct(form, params?.id));
+    dispatch(updateProduct(formData, params?.id));
   };
 
   useEffect(() => {
@@ -190,7 +195,7 @@ function Product() {
             }
             value={formData?.shipping || ""}
           />
-          <Input
+          {/* <Input
             endAdornment={
               <InputAdornment position="end">
                 <input
@@ -199,6 +204,20 @@ function Product() {
                   name="coverImage"
                   onChange={(e) =>
                     setFormData({ ...formData, coverImage: e.target.files[0] })
+                  }
+                />
+              </InputAdornment>
+            }
+          /> */}
+          <Input
+            endAdornment={
+              <InputAdornment position="end">
+                <FileBase
+                  className={classes.file}
+                  type="file"
+                  name="coverImage"
+                  onDone={({ base64 }) =>
+                    setFormData({ ...formData, imageUrl: base64 })
                   }
                 />
               </InputAdornment>
@@ -235,7 +254,7 @@ function Product() {
             onClick={uploadProduct}
             variant="contained"
             className={classes.submit}
-            type="button"
+            type="submit"
           >
             Submit
           </Button>
@@ -244,7 +263,7 @@ function Product() {
             onClick={update}
             variant="contained"
             className={classes.submit}
-            type="button"
+            type="submit"
           >
             Update
           </Button>
