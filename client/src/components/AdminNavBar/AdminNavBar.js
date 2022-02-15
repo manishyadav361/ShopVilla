@@ -28,7 +28,7 @@ function AdminNavBar() {
         <Typography className={classes.email}>{user?.result?.email}</Typography>
       </Box>
       <Box className={classes.bottom}>
-        <Button
+        {/* <Button
           onClick={() => navigate("/admin")}
           className={
             location.pathname === "/admin"
@@ -38,7 +38,7 @@ function AdminNavBar() {
           startIcon={<HomeIcon />}
         >
           Home
-        </Button>
+        </Button> */}
         <Button
           onClick={() => navigate(`/admin/products`)}
           className={

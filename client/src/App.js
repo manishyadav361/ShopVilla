@@ -13,10 +13,7 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Checkout from "./components/Checkout/Checkout";
 import Success from "./components/Checkout/Success";
 import Alan from "./components/Alan/Alan";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getAllProducts } from "./actions/Products";
-import { Audio, Oval } from "react-loader-spinner";
+import { useState } from "react";
 
 function App() {
   const classes = useStyles();
@@ -30,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Header />} />
           <Route path="/auth" element={<Auth />} />
+
           <Route
             exact
             path="/profile"

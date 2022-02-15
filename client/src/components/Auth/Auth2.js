@@ -14,17 +14,8 @@ import GoogleLogin from "react-google-login";
 import GoogleLogo from "../../images/google-logo-9824.png";
 import { signUp, signIn } from "../../actions/Auth";
 import Loader from "../Loader";
-import { RESET_ERROR } from "../../actionTypes/actionTypes";
 function Auth() {
   const [toggle, setToggle] = useState(false);
-  const [errors, setErrors] = useState({
-    email: { required: false, message: "", valid: true },
-    password: { required: false, message: "" },
-    confirmPassword: { required: false },
-    username: { required: false },
-    error: false,
-  });
-  const [error, setError] = useState(false);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -33,68 +24,28 @@ function Auth() {
     confirmPassword: "",
   });
 
-  const required = (e) => {
-    if (e.target.value.length < 1) {
-      setErrors({
-        ...errors,
-        [e.target.name]: { required: true },
-      });
-      setError(true);
-    } else {
-      setErrors({
-        ...errors,
-        [e.target.name]: { required: false },
-      });
-      setError(false);
-    }
-  };
-
-  const password = (e) => {
-    if (e.target.value.length < 6) {
-      setErrors({
-        ...errors,
-        [e.target.name]: {
-          message: "password must be atleast 6 character long.",
-        },
-      });
-      setError(true);
-    } else {
-      setError(false);
-    }
-  };
-
-  const emailCheck = (e) => {
-    let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (re.test(e.target.value)) {
-      setErrors({
-        ...errors,
-        email: { ...errors.email, message: "", valid: true },
-      });
-      setError(false);
-    } else {
-      setErrors({ ...errors, error: true });
-      setError(true);
-
-      setErrors({
-        ...errors,
-        email: { ...errors.email, message: "Invalid email", valid: false },
-      });
-    }
-  };
   const classes = useStyles();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.Auth);
   const history = useNavigate();
 
-  const registerUser = () => {
-    if (!error) {
-      dispatch(signUp(formData, history));
+  const required = (value) => {
+    if (!value.toString().trim().length) {
+      return "require";
     }
   };
-  const login = () => {
-    if (!error) {
-      dispatch(signIn(formData, history));
+
+  useEffect(() => {
+    if (state.error) {
+      console.log(state.error);
     }
+  }, [state.error]);
+
+  const register = () => {
+    dispatch(signUp(formData, history));
+  };
+  const login = () => {
+    dispatch(signIn(formData, history));
   };
 
   const googleFailure = (response) => {
@@ -107,11 +58,6 @@ function Auth() {
     dispatch({ type: "SIGNIN", payload: { result, token } });
     history("/");
   };
-
-  useEffect(() => {
-    dispatch({ type: RESET_ERROR });
-    console.log("toggle");
-  }, [toggle]);
 
   return (
     <>
@@ -126,56 +72,36 @@ function Auth() {
           <TextField
             className={classes.textField}
             variant="outlined"
+            required
             label="Username"
-            name="username"
             size="small"
-            error={errors.username.required ? true : false}
-            helperText={errors.username.required}
-            onChange={(e) => {
-              required(e);
-              setFormData({ ...formData, username: e.target.value });
-            }}
+            onChange={(e) =>
+              setFormData({ ...formData, username: e.target.value })
+            }
           />
         )}
         {!toggle && state?.error && (
-          <Typography variant="body2" color="secondary">
-            {" "}
-            {state?.error}
-          </Typography>
+          <Typography color="secondary"> {state?.error}</Typography>
         )}
         <TextField
           className={classes.textField}
           variant="outlined"
-          name="email"
           required
           label="Email"
           size="small"
-          error={!errors.email.valid || errors.email.required ? true : false}
-          helperText={errors.email.message}
           onChange={(e) => {
-            required(e);
-            emailCheck(e);
             setFormData({ ...formData, email: e.target.value });
           }}
-          autoFocus={false}
         />
-        {errors.email.required && "The field is required."}
 
         <TextField
           className={classes.textField}
           variant="outlined"
           required
-          error={
-            errors.password.required || errors.password.message ? true : false
-          }
-          helperText={errors.password.required || errors.password.message}
           label="Password"
-          name="password"
           type="password"
           size="small"
           onChange={(e) => {
-            required(e);
-            password(e);
             setFormData({ ...formData, password: e.target.value });
           }}
         />
@@ -185,29 +111,17 @@ function Auth() {
             className={classes.textField}
             variant="outlined"
             required
-            error={
-              errors.confirmPassword.required || errors.confirmPassword.message
-                ? true
-                : false
-            }
-            helperText={
-              errors.confirmPassword.required || errors.confirmPassword.message
-            }
-            name="confirmPassword"
             type="password"
             label="Re-enter Password"
             size="small"
-            onChange={(e) => {
-              required(e);
-              password(e);
-              setFormData({ ...formData, confirmPassword: e.target.value });
-            }}
+            onChange={(e) =>
+              setFormData({ ...formData, confirmPassword: e.target.value })
+            }
           />
         )}
-
         {toggle ? (
           <Button
-            onClick={registerUser}
+            onClick={register}
             className={classes.authBtn}
             variant="contained"
           >

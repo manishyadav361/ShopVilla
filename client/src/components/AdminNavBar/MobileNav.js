@@ -10,8 +10,9 @@ function MobileNav() {
   const classes = useStyles();
   const navigate = useNavigate();
   const [openNav, setOpenNav] = useState(false);
-  const user = JSON.parse(localStorage.getItem("profile"));
+
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("profile"));
     if (!user) {
       navigate("/auth");
       alert("You have been logged out!! Please Login again.");
@@ -31,7 +32,7 @@ function MobileNav() {
       <Box
         className={openNav ? `${classes.toggleNav}  ` : `${classes.mobileNav}`}
       >
-        <Box className={classes.link}>
+        {/* <Box className={classes.link}>
           <IconButton
             color="inherit"
             onClick={() => {
@@ -42,7 +43,7 @@ function MobileNav() {
             <HomeIcon fontSize="large" />
           </IconButton>
           <Typography>Home</Typography>
-        </Box>
+        </Box> */}
         <Box className={classes.link}>
           <IconButton
             color="inherit"

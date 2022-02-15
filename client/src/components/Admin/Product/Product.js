@@ -14,10 +14,11 @@ import {
   insertProduct,
   updateProduct,
 } from "../../../actions/Products";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import MobileNav from "../../AdminNavBar/MobileNav";
 import AdminNavBar from "../../AdminNavBar/AdminNavBar";
 import FileBase from "react-file-base64";
+import Loader from "../../Loader";
 function Product() {
   const classes = useStyles();
   const params = useParams();
@@ -48,6 +49,7 @@ function Product() {
     imageUrl: "",
   };
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState(initialState);
 
@@ -64,7 +66,11 @@ function Product() {
   const uploadProduct = (e) => {
     e.preventDefault();
     dispatch(
-      insertProduct(formData, user?.result?._id || user?.result?.googleId)
+      insertProduct(
+        formData,
+        user?.result?._id || user?.result?.googleId,
+        navigate
+      )
     );
   };
 
@@ -89,6 +95,7 @@ function Product() {
 
   return (
     <Container className={classes.container}>
+      {state?.loading && <Loader />}
       <Box>
         <AdminNavBar />
         <MobileNav />

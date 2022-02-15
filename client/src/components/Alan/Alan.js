@@ -25,8 +25,9 @@ const Alan = () => {
         } else if (command === "show product") {
           let number =
             index.length > 2 ? wordsToNumbers(index, { fuzzy: true }) : index;
-          console.log(number);
-          console.log(number, savedProducts?.length);
+          // console.log(number);
+          // console.log(number, savedProducts?.length);
+          // console.log(savedProducts[number]._id);
 
           if (number && number < savedProducts.length) {
             let id = savedProducts[number]._id;

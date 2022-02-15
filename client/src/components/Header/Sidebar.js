@@ -42,7 +42,7 @@ function Sidebar({ toggle, setToggle }) {
       <SidebarOption
         text="Admin Panel"
         Icon={<SupervisorAccountIcon />}
-        action={() => navigate("/admin")}
+        action={() => navigate("/admin/products")}
       />
       <SidebarOption
         text="Logout"

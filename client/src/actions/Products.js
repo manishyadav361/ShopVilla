@@ -48,10 +48,12 @@ export const getProductsBySearch = (searchString) => async (dispatch) => {
 };
 
 // insert a new product for admins
-export const insertProduct = (formData, id) => async (dispatch) => {
+export const insertProduct = (formData, id, navigate) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
     const { data } = await api.insertProduct(formData, id);
     dispatch({ type: INSERT_PRODUCT, payload: data.product });
+    navigate("/admin/products");
   } catch (error) {
     dispatch({ type: STOP_LOADING });
   }
