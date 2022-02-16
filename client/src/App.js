@@ -84,7 +84,7 @@ function App() {
             path={"/products/:id"}
             element={
               <>
-                <ProductDetails />
+                <ProductDetails user={user} />
               </>
             }
           />

@@ -8,17 +8,24 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import useStyles from "./styles";
 import RelatedProducts from "./RelatedProducts";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { likePost } from "../../actions/Products";
 
-function ProductDetail({ product, loading }) {
+function ProductDetail({ product, loading, user }) {
   const [toggle, setToggle] = React.useState(false);
+  const state = useSelector((state) => state.Products);
+  const [like, setLike] = useState(false);
   const classes = useStyles();
   const location = useLocation();
+  const dispatch = useDispatch();
+
   const table = [
     { head: "Brand", text: product?.brandName || "N/A" },
     { head: "Category", text: product?.category || "N/A" },
@@ -28,6 +35,19 @@ function ProductDetail({ product, loading }) {
   React.useEffect(() => {
     setToggle(false);
   }, [location]);
+
+  const likeProduct = () => {
+    dispatch(likePost(product?._id));
+  };
+
+  useEffect(() => {
+    const likePresent = product?.like;
+    if (likePresent) {
+      setLike(true);
+    } else {
+      setLike(false);
+    }
+  }, [product]);
 
   return (
     <Container
@@ -49,9 +69,18 @@ function ProductDetail({ product, loading }) {
             {product?.title}{" "}
             {product?.quantity && `(only ${product?.quantity} left)`}
           </Typography>
-          <IconButton color="inherit">
-            <FavoriteBorderIcon />
-          </IconButton>
+          <Box style={{ display: "flex", alignItems: "center" }}>
+            {!like ? (
+              <IconButton color="inherit" onClick={likeProduct}>
+                <FavoriteBorderIcon />
+              </IconButton>
+            ) : (
+              <IconButton color="inherit" onClick={likeProduct}>
+                <FavoriteIcon color={like ? "error" : "inherit"} />
+              </IconButton>
+            )}
+            <Typography variant="h6">{product?.likeCount}</Typography>
+          </Box>
         </Box>
       </Box>
       <Box className={classes.title}>

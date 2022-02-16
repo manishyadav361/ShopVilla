@@ -40,6 +40,9 @@ export const deleteProduct = (id, imageToUpdate) =>
 export const updateProduct = (formData, id) =>
   API.patch(`/products/${id}`, { formData });
 
+export const likeProduct = (productId) =>
+  API.post(`/products/product/${productId}`);
+
 // CART ROUTES
 export const getCart = () => API.get("/cart");
 

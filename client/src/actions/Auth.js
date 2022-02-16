@@ -11,7 +11,7 @@ export const signIn = (formData, history) => async (dispatch) => {
     dispatch({ type: START_LOADING });
     const { data } = await api.signIn(formData);
     dispatch({ type: SIGNIN, payload: data });
-    history("/");
+    history("/products");
   } catch (error) {
     dispatch({ type: SIGNIN, error: error?.response?.data });
     dispatch({ type: STOP_LOADING });

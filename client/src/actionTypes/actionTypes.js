@@ -16,3 +16,5 @@ export const INSERT_PRODUCT = "INSERT_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const RESET_ERROR = "RESET_ERROR";
+
+export const LIKE_POST = "LIKE_POST";

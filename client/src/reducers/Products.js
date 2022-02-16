@@ -3,6 +3,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT,
   INSERT_PRODUCT,
+  LIKE_POST,
   PRODUCTS_BY_SEARCH,
   START_LOADING,
   STOP_LOADING,
@@ -77,11 +78,22 @@ const reducer = (state = initialState, action) => {
         }
         return product;
       });
+
       return {
         ...state,
         products: updated,
         loading: false,
         error: "",
+      };
+    case LIKE_POST:
+      const like = action.payload?.like;
+      return {
+        ...state,
+        product: {
+          ...state?.product,
+          like: like,
+          likeCount: action.payload?.likeCount,
+        },
       };
     default:
       return state;

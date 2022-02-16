@@ -7,7 +7,7 @@ import { getProduct } from "../../actions/Products";
 import ProductDetail from "./ProductDetail";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Loader from "../Loader";
-function ProductDetails() {
+function ProductDetails({ user }) {
   const classes = useStyles();
   const params = useParams();
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ function ProductDetails() {
             </IconButton>
           </Box>
 
-          <ProductDetail product={product} loading={loading} />
+          <ProductDetail user={user} product={product} loading={loading} />
         </>
       )}
     </Container>

@@ -7,7 +7,7 @@ export const getProducts = async (req, res) => {
   //   return res.status(400).send("Access Denied !!");
   // }
   try {
-    const products = await ProductsModel.find({});
+    const products = await ProductsModel.find({}, { like: 0 });
     res.status(200).json({ products: products });
   } catch (error) {
     res.status(500).send("something went wrong !");
@@ -18,7 +18,15 @@ export const getProduct = async (req, res) => {
   const { id } = req.params;
   try {
     const product = await ProductsModel.findById(id);
-    res.status(200).json({ product: product });
+    const like = product?.like?.filter((like) => like === req.userId)?.[0];
+
+    res.status(200).json({
+      product: {
+        ...product?._doc,
+        like: like ? true : false,
+        likeCount: product?.like?.length,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send("something went wrong!!");
@@ -127,5 +135,37 @@ export const updateProduct = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send("something went wrong!!");
+  }
+};
+
+export const likePost = async (req, res) => {
+  const { productId } = req.params;
+  const { userId } = req;
+
+  try {
+    const product = await ProductsModel.findById(productId);
+
+    const likePresent = product?.like?.filter((like) => like === userId)?.[0];
+    if (likePresent) {
+      const like = product?.like?.filter((like) => like !== userId);
+      product.like = like;
+      const data = await product.save();
+      return res.status(200).json({
+        product: {
+          _id: data._id,
+          like: false,
+          likeCount: data?.like?.length,
+        },
+      });
+      return;
+    } else {
+      product?.like?.push(userId);
+      const data = await product.save();
+      return res.status(200).json({
+        product: { _id: data._id, like: true, likeCount: data?.like?.length },
+      });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

@@ -3,6 +3,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT,
   INSERT_PRODUCT,
+  LIKE_POST,
   PRODUCTS_BY_SEARCH,
   START_LOADING,
   STOP_LOADING,
@@ -78,5 +79,15 @@ export const updateProduct = (formData, id) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: STOP_LOADING });
     // console.log(error);
+  }
+};
+
+export const likePost = (productId) => async (dispatch) => {
+  try {
+    const { data } = await api.likeProduct(productId);
+
+    dispatch({ type: LIKE_POST, payload: data.product });
+  } catch (error) {
+    console.log(error);
   }
 };

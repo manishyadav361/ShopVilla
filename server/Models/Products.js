@@ -19,6 +19,7 @@ const ProductsSchema = mongoose.Schema({
   shipping: { type: Number, default: 0 },
   inStock: { type: Boolean },
   freeShipping: { type: Boolean },
+  like: { type: Array },
 });
 
 export default mongoose.model("Products", ProductsSchema);

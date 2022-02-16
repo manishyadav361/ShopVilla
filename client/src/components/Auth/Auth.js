@@ -22,8 +22,8 @@ function Auth() {
     password: { required: false, message: "" },
     confirmPassword: { required: false },
     username: { required: false },
-    error: false,
   });
+
   const [error, setError] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -32,7 +32,12 @@ function Auth() {
     password: "",
     confirmPassword: "",
   });
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.Auth);
+  const history = useNavigate();
 
+  // validating whether the input is empty is not
   const required = (e) => {
     if (e.target.value.length < 1) {
       setErrors({
@@ -48,7 +53,7 @@ function Auth() {
       setError(false);
     }
   };
-
+  // validating password
   const password = (e) => {
     if (e.target.value.length < 6) {
       setErrors({
@@ -63,6 +68,7 @@ function Auth() {
     }
   };
 
+  // validating email
   const emailCheck = (e) => {
     let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (re.test(e.target.value)) {
@@ -81,10 +87,6 @@ function Auth() {
       });
     }
   };
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state.Auth);
-  const history = useNavigate();
 
   const registerUser = () => {
     if (!error) {

@@ -51,7 +51,7 @@ function CartItems({ id, total, quantity, loading }) {
       <Box className={classes.cartItem}>
         {!cartItem ? (
           <>
-            {loading ? (
+            {/* {loading ? (
               <CartSkeleton />
             ) : (
               <Box className={classes.productError}>
@@ -64,11 +64,12 @@ function CartItems({ id, total, quantity, loading }) {
                   <DeleteIcon />
                 </IconButton>
               </Box>
-            )}
+            )} */}
+            {loading && <CartSkeleton />}
           </>
         ) : (
           <>
-            {loading && <CartSkeleton />}
+            {/* {loading && <CartSkeleton />} */}
             <Box
               className={classes.imageBox}
               style={{ backgroundImage: `url(${cartItem?.coverImage})` }}
