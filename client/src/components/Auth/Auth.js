@@ -227,7 +227,7 @@ function Auth() {
         <p>OR</p>
         <GoogleLogin
           buttonText="Google"
-          clientId="527556148951-o5flrki3utm5tr4743fs002frrosv7op.apps.googleusercontent.com"
+          clientId="52755614951-o5flrki3utm5tr4743fs002frrosv7op.apps.googleusercontent.com"
           render={(renderProps) => (
             <>
               <Button
